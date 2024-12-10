@@ -1,0 +1,177 @@
+/* Bandeau en haut */
+header {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #004d99;
+    color: white;
+    gap: 30px; /* Espacement entre les groupes */
+    flex-wrap: wrap; /* Gestion pour petits écrans */
+    position: relative; /* Positionnement relatif pour l'overlay */
+}
+
+header * {
+    position: relative;
+    z-index: 2;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+header .infos p {
+    margin-bottom: 10px;
+}
+
+header h3 {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+header .views {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+header .views button {
+    margin: 0;
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    border: 1px solid white;
+}
+
+header .views button.active {
+    background-color: #004d99;
+    color: white;
+    border: 1px solid white;
+}
+
+header .views  #adv-view:hover {
+    background-color: #004d99;
+    color: white;
+    border: 1px solid white;
+}
+
+header .views #prod-view:hover {
+    background-color: #FF8C00;
+    color: white;
+    border: 1px solid white;
+}
+
+header .views #livr-view:hover {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid white;
+}
+
+header .refresh-button {
+    margin: 0;
+    padding: 8px 15px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    border: 1px solid white;
+    width: 100%;
+}
+
+header .refresh-button.active {
+    background-color: #004d99;
+    color: white;
+    border: 1px solid white;
+}
+
+header .search {
+    font-size: 14px;
+    white-space: nowrap; /* Évite les retours à la ligne */
+}
+
+header .sorting {
+    font-size: 14px;
+    white-space: nowrap; /* Évite les retours à la ligne */
+}
+
+header .search input,
+header .sorting select {
+    font-size: 14px; /* Taille de la police */
+    border-radius: 5px; /* Coins arrondis */
+    border: 1px solid white; /* Bordure */
+    background-color: white; /* Fond */
+    padding: 5px 10px; /* Espacement intérieur */
+    width: 150px; /* Largeur fixe */
+    height: 35px; /* Hauteur fixe */
+    line-height: 24px; /* Hauteur de la ligne pour aligner le texte */
+    box-sizing: border-box; /* Inclut padding et bordure dans la taille totale */
+    display: inline-block; /* Assure un alignement identique */
+    margin-top: 0;
+}
+
+.ca-infos {
+    display: flex;
+    gap: 10px;
+}
+
+header .ca-info {
+    font-size: 14px;
+    white-space: nowrap; /* Évite les retours à la ligne */
+}
+
+header .ca-info p {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #333;
+}
+
+header .update-current-week {
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+header .infos {
+    font-size: 14px;
+    white-space: nowrap;
+    margin-left: auto; /* Pousse les infos à l'extrême droite */
+}
+
+.mode-toggle {
+    display: flex;
+    align-items: center;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#theme-toggle img {
+    width: 24px;
+    height: 24px;
+}
+
+/* responsive pour les grands écrans */
+@media (min-width: 2029px) {
+    header {
+        gap: 50px;
+    }
+}

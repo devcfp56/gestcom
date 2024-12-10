@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTCOM CFP</title>
+    <link rel="icon" href="https://pro.cfp56.com/wp-content/uploads/2022/06/Rectangle_Vector-150x73.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700,800,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p id="loading-text">Chargement de la GESTCOM...</p>
+    </div>
+
+    <div id="gestcom-container" class="gestcom" style="display: none;">
+        <div id="gestcom">GESTCOM</div>
+    </div>
+
+    <nav id="nav">
+        <img src="https://brc-idf.fr/wp-content/uploads/2020/12/CFP-LOGO.png" alt="Logo CFP">
+        <a class="active" href="/gestcom">GESTCOM</a>
+        <a href="">A VENIR</a>
+    </nav>
+
+    <header id="header">
+    
+        <!-- Boutons des vues -->
+        <div class="views">
+            <button id="adv-view" class="active">ADV</button>
+            <button id="prod-view">PROD</button>
+            <button id="livr-view">LIVR</button>
+        </div>
+
+        <div class="sorting">
+            <h3>Trier par :</h3>
+            <select id="sort-options">
+                <option value="sem_livraison">Semaine de livraison</option>
+                <option value="commande">Commande</option>
+                <option value="bon_livraison">Bon Livraison</option>
+                <option value="fact">Facture</option>
+                <option value="ca">Chiffre d'affaires</option>
+            </select>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="search">
+            <h3>Recherche :</h3>
+            <input type="text" id="search-text" placeholder="Rechercher...">
+        </div>
+    
+        <!-- Informations de la semaine en cours -->
+        <div class="ca-infos">
+            <!-- Infos de la semaine en cours -->
+            <div class="ca-info">
+                <h3>Semaine en cours</h3>
+                <p>ALU : <span id="alu-doc">-</span></p>
+                <p>PVC : <span id="pvc-doc">-</span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>CA</h3>
+                <p><span id="alu-CA">-</span></p>
+                <p><span id="pvc-CA">-</span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>En cours / Reste</h3>
+                <p><span id="alu-en-cours-reste">-</span></p>
+                <p><span id="pvc-en-cours-reste">-</span></p>
+            </div>
+        </div>
+
+        <div class="ca-info">
+            <h3>Totaux</h3>
+            <p><span id="ca-fab">Fabriqués :</span></p>
+            <p><span id="ca-fac">Facturés :</span></p>
+        </div>
+
+        <div class="ca-infos">
+            <div class="ca-info">
+                <h3>Portails + Clotures</h3>
+                <p><span id="ca-portails-clotures-alu">ALU :</span></p>
+                <p><span id="ca-portails-clotures-pvc">PVC :</span></p>
+            </div>
+            
+            <div class="ca-info">
+                <h3>Portails</h3>
+                <p><span id="ca-portails-alu"></span></p>
+                <p><span id="ca-portails-pvc"></span></p>
+            </div>
+            
+            <div class="ca-info">
+                <h3>Clotures</h3>
+                <p><span id="ca-clotures-alu"></span></p>
+                <p><span id="ca-clotures-pvc"></span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>Accessoires</h3>
+                <p><span id="ca-acces"></span></p>
+            </div>
+        </div>
+        
+
+        <div class="plm">
+            <button id="plm-button">   </button>
+        </div>
+    
+        <!-- Date et bouton de rafraîchissement -->
+        <div class="infos">
+            <p>Date du jour : <span id="current-date"></span></p>
+            <p>Dernière actualisation : <span id="last-refresh"></span></p>
+            <button class="refresh-button" id="refresh-button">Actualiser</button>
+        </div>
+
+    </header>
+
+    <main>
+        <aside id="filters-panel" class="expanded">
+            <h2>Filtres</h2>
+
+            <!-- Tri -->
+            <div class="filters">
+
+                <!-- fine ligne séparatrice -->
+                <div class="separator"></div>
+
+                <div class="filter-week">
+                    <label for="week-number">Semaine :</label>
+                    <input type="text" id="week-number" placeholder="Ex: 01" min="01" max="52">
+                    
+                    <label for="year">Année :</label>
+                    <input type="text" id="year" placeholder="Ex: 2025" min="2000" max="2050">
+                </div>
+                
+                <div class="filter-reset">
+                    <button id="filter-button">Filtrer</button>
+                    <button id="reset-button">Réinitialiser</button>
+                </div>                
+
+                <!-- fine ligne séparatrice -->
+                <div class="separator"></div>
+
+                <div class="filter-produits">
+                    <label>Produits :</label>
+                    <div class="filter-produits-option">
+                        <button id="produits-tous" class="active">Tous</button>
+                        <button id="produits-alu" class="">ALU</button>
+                        <button id="produits-pvc" class="">PVC</button>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <section>
+            <p id="number-of-commands-and-ca"></p>
+            <table>
+                <thead>
+                    <tr id="table-header"></tr>
+                </thead>
+                <tbody id="commandes-list">
+                    <!-- Les commandes seront injectées ici -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Popup de confirmation -->
+    <div id="refresh-popup" class="popup">
+        <div class="popup-content">
+            <p>Une heure s'est écoulée depuis le dernier rafraîchissement. Certaines commandes peuvent avoir été modifiées ou ajoutées. Voulez-vous rafraîchir la page ?</p>
+            <button id="refresh-yes">Oui</button>
+            <button id="refresh-no">Non</button>
+        </div>
+    </div>
+
+    <div id="commande-popup" class="commande-popup">
+        <div class="commande-popup-content">
+            <div class="commande-popup-header">
+                <h2 id="commande-popup-title">Titre de la commande</h2>
+                <span class="commande-popup-close">&times;</span>
+            </div>
+            <div id="commande-popup-details"></div>
+
+        </div>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+    <script type="module" src="/table.js"></script>
+    <script type="module" src="/popup.js"></script>
+    <script type="module" src="/filters.js"></script>
+</body>
+</html>

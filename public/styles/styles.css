@@ -1,0 +1,773 @@
+/* Configuration de base */
+/* Configuration de base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    /* Toujours afficher la barre de défilement verticale */
+    overflow-y: scroll;
+}
+
+/* Masquer le défilement */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Animation du texte */
+#gestcom {
+    font-size: 80px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: white;
+}
+
+/* Définition de l'animation zoom durée */
+@keyframes zoomInOut {
+    0% {
+        transform: scale(0); /* Très petit au départ */
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1); /* Taille normale après 1 seconde */
+    }
+    50% {
+        transform: scale(1); /* Maintenir la taille normale */
+    }
+    75% {
+        transform: scale(1); /* Maintenir la taille normale */
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+    }
+    100% {
+        transform: scale(800); /* Augmenter la taille à 800% */
+        opacity: 0;
+    }
+}
+
+
+/* Lancer l'animation quand la classe 'start-animation' est ajoutée */
+#gestcom.start-animation {
+    animation: zoomInOut 2s ease-in-out forwards;
+}
+
+/* Laisser un fond visible pendant l'animation */
+.gestcom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 1000;
+    background: #004d99;
+    background-size: 400% 400%;
+    animation: gradientAnimation 4s ease infinite;
+}
+
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #004d99;
+    background-size: 400% 400%;
+    animation: gradientAnimation 4s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#loading-text {
+    font-size: 24px;
+    color: white;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: white;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Nav */
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff; /* Couleur unie pour le bandeau */
+    padding: 20px; /* Espace vertical dans le bandeau */
+    height: 50px; /* Hauteur du bandeau */
+    gap: 40px; /* Espacement entre les éléments */
+}
+
+nav img {
+    height: 40px; /* Taille de l'image */
+}
+
+nav a {
+    text-decoration: none; /* Supprimer le soulignement des liens */
+    color: #333; /* Couleur du texte */
+    font-size: 16px; /* Taille de la police */
+    padding: 10px; /* Espacement intérieur */
+}
+
+nav a.active {
+    padding: 10px; /* Espacement intérieur */
+    border-bottom: 1px solid #333;
+}
+
+nav a:hover {
+    padding: 10px; /* Espacement intérieur */
+    border-bottom: 1px solid #333;
+}
+
+/* Overlay sombre uniquement dans le header */
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Fond noir semi-transparent */
+    z-index: 1; /* Assurer que l'overlay est au-dessus de l'image de fond */
+}
+
+/* Conteneur principal */
+main {
+    display: flex;
+    width: 100%;
+}
+
+/* Volet des filtres */
+aside {
+    background-color: #e6f7ff;
+    width: 250px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
+    width: 10%;
+    height: auto;
+}
+
+.aside-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6); /* Fond noir semi-transparent */
+    z-index: 1; /* Assurer que l'overlay est au-dessus de l'image de fond */
+}
+
+aside * {
+    position: relative; /* S'assurer que le texte et autres éléments sont au-dessus de l'overlay */
+    z-index: 2;
+}
+
+aside h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    margin-bottom: 10px;
+}
+
+aside ul li label {
+    display: block;
+    cursor: pointer;
+}
+
+aside ul li input {
+    margin-right: 8px;
+}
+
+.separator {
+    margin: 5px 0;
+    border-bottom: 1px solid #333;
+    box-shadow: none;
+}
+
+/* Titre de la section des filtres */
+#filters-panel h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Conteneur pour chaque filtre individuel */
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Étiquettes des champs de filtre */
+.filters label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Champs de saisie (input) */
+.filters input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-produits-option {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Deux colonnes de largeur égale */
+    grid-template-rows: auto auto; /* Deux lignes automatiquement ajustées */
+    gap: 10px; /* Espace entre les éléments */
+    width: 100%;
+    max-width: 400px; /* Limiter la largeur maximale du conteneur si nécessaire */
+}
+
+.filter-produits label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#produits-alu {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+#produits-pvc {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+#produits-tous {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+#produits-alu.active {
+    background-color: #004d99;
+    color: white;
+}
+
+#produits-pvc.active {
+    background-color: #004d99;
+    color: white;
+}
+
+#produits-tous.active {
+    background-color: #004d99;
+    color: white;
+}
+
+.filter-week {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
+    grid-template-rows: auto auto; /* Deux lignes automatiquement ajustées */
+    gap: 10px; /* Espace entre les éléments */
+    width: 100%;
+    max-width: 400px; /* Limiter la largeur maximale du conteneur si nécessaire */
+}
+
+.filter-week label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-week input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+/* Alignement des éléments dans la grille */
+.filter-week #week-number {
+    grid-column: 1; /* Colonne 1 */
+    grid-row: 2; /* Ligne 1 */
+}
+
+.filter-week #year {
+    grid-column: 2; /* Colonne 2 */
+    grid-row: 2; /* Ligne 1 */
+    margin-top: 0; /* Supprimer l'espacement supérieur */
+}
+
+.filter-reset {
+    display: inline-flex;
+    gap: 10px;
+}
+
+
+
+/* Boutons */
+.filters button {
+    padding: 10px;
+    background-color: #004d99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Style du bouton de réinitialisation */
+#reset-button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+
+/* Section des commandes */
+section {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto;
+    transition: margin-left 0.3s ease;
+    width: 90%;
+}
+
+/* Tableau des commandes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Fixe la largeur des colonnes */
+}
+
+table th.etat, td.etat {
+    padding: 20px 30px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table td, table th {
+    padding: 20px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+table th {
+    background-color: #004d99;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+tr.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+table td {
+    font-size: 14px;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Spécifie une largeur fixe pour la colonne "Commentaire" */
+td.commentaire, th.commentaire {
+    width: 12%; /* Largeur fixe pour la colonne commentaire */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "Commande" */
+td.commande, th.commande {
+    width: 5%; /* Largeur fixe pour la colonne commande */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "aravp" */
+td.aravp, th.aravp {
+    width: 5%; /* Largeur fixe pour la colonne aravp */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "CA" */
+td.ca, th.ca {
+    width: 5%; /* Largeur fixe pour la colonne CA */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "semliv" */
+td.semliv, th.semliv {
+    width: 5%; /* Largeur fixe pour la colonne semliv */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+td.transp, th.transp {
+    width: 5%; /* Largeur fixe pour la colonne semliv */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+td.dep, th.dep {
+    width: 2%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.details, th.details {
+    width: 10%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.client, th.client {
+    width: 12%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th.dep:hover::after {
+    content: "Département de livraison";
+    position: absolute;
+    top: 100%; /* Positionner le texte juste en dessous de la cellule */
+    left: 0;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+th.semliv:hover::after {
+    content: "Semaine de livraison";
+    position: absolute;
+    top: 100%; /* Positionner le texte juste en dessous de la cellule */
+    left: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Style des boutons et champs */
+button, input[type="text"], input[type="checkbox"] {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+/* Style pour le texte de l'état sous la barre de progression */
+.progress-bar {
+    width: 100%; /* S'assurer que la barre occupe toute la largeur disponible */
+    height: 10px; /* Définir la hauteur de la barre */
+    background-color: #e0e0e0; /* Couleur de fond de la barre (gris clair) */
+    border-radius: 5px; /* Arrondir les bords de la barre */
+    margin-bottom: 5px; /* Espacement entre la barre et le texte */
+}
+
+/* Style de la barre de progression proprement dite */
+.progress {
+    height: 100%; /* La hauteur de la barre de progression prend la hauteur définie */
+    border-radius: 5px; /* Arrondir les bords de la barre de progression */
+}
+
+/* Style pour le texte de l'état sous la barre */
+.state-text {
+    text-align: center; /* Centrer le texte sous la barre */
+    font-size: 12px; /* Taille du texte */
+    color: #555; /* Couleur du texte */
+    margin-top: 5px; /* Espacement entre la barre et le texte */
+}
+
+/* Couleurs de la barre de progression en fonction de la largeur */
+/* Couleurs de la barre de progression en fonction de la largeur */
+
+/* Si la progression est entre 0% et 14%, couleur orange doux */
+.progress-bar .progress[style*="width: 0%"], 
+.progress-bar .progress[style*="width: 14%"] {
+    background-color: #ffb74d; /* orange doux */
+}
+
+/* Si la progression est entre 14% et 28%, couleur jaune doux */
+.progress-bar .progress[style*="width: 14%"], 
+.progress-bar .progress[style*="width: 29%"] {
+    background-color: #ffee58; /* jaune doux */
+}
+/* Si la progression est entre 42% et 57%, couleur vert clair */
+.progress-bar .progress[style*="width: 43%"], 
+.progress-bar .progress[style*="width: 57%"] {
+    background-color: #81c784; /* vert clair */
+}
+
+/* Si la progression est entre 57% et 71%, couleur vert moyen */
+.progress-bar .progress[style*="width: 57%"], 
+.progress-bar .progress[style*="width: 71%"] {
+    background-color: #66bb6a; /* vert moyen */
+}
+
+/* Si la progression est entre 71% et 85%, couleur vert plus foncé */
+.progress-bar .progress[style*="width: 71%"], 
+.progress-bar .progress[style*="width: 86%"] {
+    background-color: #43a047; /* vert plus foncé */
+}
+
+/* Si la progression est 100%, couleur vert foncé */
+.progress-bar .progress[style*="width: 100%"] {
+    background-color: #388e3c; /* vert foncé */
+}
+
+/* Style de la popup */
+.popup {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assurer qu'elle est au-dessus des autres éléments */
+}
+
+/* Contenu de la popup */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+}
+
+.popup button {
+    padding: 10px;
+    margin: 10px;
+    background-color: #004d99;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style pour la popup */
+.popup-plm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* S'assurer que la popup est au-dessus des autres éléments */
+  }
+  
+  /* Style pour le contenu de la popup */
+  .popup-plm-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner du relief */
+  }
+
+
+
+/* Styles pour la popup */
+.commande-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Initialement cachée */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px); /* Flou d'arrière-plan pour un effet moderne */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.commande-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 40%;
+    padding: 20px;
+    overflow: auto;
+}
+
+.commande-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.commande-popup-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.commande-popup-close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.commande-popup-close:hover {
+    color: #e74c3c;
+}
+
+#commande-popup-details {
+    /* 3 colonnes pour les détails de la commande */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#commande-popup-details h3 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+  /* Style pour l'input de code */
+  .code-plm {
+    width: 80%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  #code-plm {
+    width: 80%;
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Bouton "Fermer" avec une couleur différente */
+  #closePopup-plm {
+    background-color: #f44336; /* Rouge pour fermer */
+  }
+
+  #submitCode-plm {
+    background-color: #4CAF50; /* Vert pour valider */
+  }
+  
+  #closePopup-plm:hover {
+    background-color: #e53935; /* Rouge foncé au survol */
+  }
+
+  #plm-button {
+    background-color: transparent;
+    border: none;
+  }
+
+.falling-object {
+    position: absolute;
+    opacity: 0;
+    animation: fallObjects 15s forwards;  /* Durée de l'animation ajustée à 15 secondes */
+    animation-timing-function: linear;
+}
+
+@keyframes fallObjects {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);  /* Rotation et chute */
+        opacity: 0;
+    }
+}
+
