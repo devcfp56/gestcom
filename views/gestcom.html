@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTCOM CFP</title>
+    <link rel="icon" href="https://pro.cfp56.com/wp-content/uploads/2022/06/Rectangle_Vector-150x73.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/filters.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/nav.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p id="loading-text">Chargement de la GESTCOM...</p>
+    </div>
+
+    <div id="gestcom-container" class="gestcom" style="display: none;">
+        <div id="gestcom">GESTCOM</div>
+    </div>
+
+    <nav id="nav">
+        <a href="/">
+            <img src="images/Logo_CFP_CMJN.jpg" alt="Logo CFP" id="logo-cfp">
+        </a>
+        <a href="/">ACCUEIL</a>
+        <a class="active" href="/gestcom">GESTCOM</a>
+        <a href="/stats">STATS</a>
+        <a href="/parametres">PARAMÈTRES</a>
+        <button id="hide-nav" class="x">&times;</button>
+    </nav>
+    
+    <button id="show-nav" id="chevron" class="fas fa-chevron-down"></button>
+
+    <header id="header">
+    
+        <!-- Boutons des vues -->
+        <div class="views">
+            <button id="adv-view" class="active">ADV</button>
+            <button id="prod-view">PROD</button>
+            <button id="livr-view">LIVR</button>
+        </div>
+
+        <div class="sorting">
+            <h3>Trier par :</h3>
+            <select id="sort-options">
+                <option value="sem_livraison">Sem. de liv.</option>
+                <option value="commande">Commande</option>
+                <option value="bon_livraison">Bon Livraison</option>
+                <option value="fact">Facture</option>
+                <option value="ca">Chiffre d'affaires</option>
+            </select>
+        </div>
+    
+        <!-- Informations de la semaine en cours -->
+        <div class="ca-infos">
+            <!-- Infos de la semaine en cours -->
+            <div class="ca-info">
+                <h3>Semaine en cours</h3>
+                <p>ALU : <span id="alu-doc">-</span></p>
+                <p>PVC : <span id="pvc-doc">-</span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>CA</h3>
+                <p><span id="alu-CA">-</span></p>
+                <p><span id="pvc-CA">-</span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>En cours / Reste</h3>
+                <p><span id="alu-en-cours-reste">-</span></p>
+                <p><span id="pvc-en-cours-reste">-</span></p>
+            </div>
+        </div>
+
+        <div class="ca-info">
+            <h3>Totaux</h3>
+            <p><span id="ca-fab">Fabriqués :</span></p>
+            <p><span id="ca-fac">Facturés :</span></p>
+        </div>
+
+        <div class="ca-infos">
+            <div class="ca-info">
+                <h3>Portails + Clotures</h3>
+                <p><span id="ca-portails-clotures-alu">ALU :</span></p>
+                <p><span id="ca-portails-clotures-pvc">PVC :</span></p>
+            </div>
+            
+            <div class="ca-info">
+                <h3>Portails</h3>
+                <p><span id="ca-portails-alu"></span></p>
+                <p><span id="ca-portails-pvc"></span></p>
+            </div>
+            
+            <div class="ca-info">
+                <h3>Clotures</h3>
+                <p><span id="ca-clotures-alu"></span></p>
+                <p><span id="ca-clotures-pvc"></span></p>
+            </div>
+
+            <div class="ca-info">
+                <h3>Accessoires</h3>
+                <p><span id="ca-acces"></span></p>
+            </div>
+        </div>
+    
+        <!-- Date et bouton de rafraîchissement -->
+        <div class="infos">
+            <p>Date du jour : <span id="current-date"></span></p>
+            <p>Dernière actualisation : <span id="last-refresh"></span></p>
+            <button class="refresh-button" id="refresh-button">Actualiser</button>
+        </div>
+
+    </header>
+
+    <main>
+        <aside id="filters-panel" class="expanded">
+
+            <div class="filters-header">
+                <i class="fas fa-filter"></i>
+                <h2>Filtres</h2>
+                <i id="clear-all" class="fas fa-trash"></i>
+            </div>
+
+            <!-- Barre de recherche -->
+            <div class="search">
+                    <h3><i class="fas fa-search"></i> Recherche :</h3>
+                <div class="search-container">
+                    <input type="text" id="search-text" placeholder="Rechercher quelque chose...">
+                    <i id="clear-btn" class="fas fa-times"></i>
+                </div>
+            </div>
+
+
+
+            <div class="filters">
+
+                <div class="filter-container">
+                    <div id="toggle-filter-date" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-date-text">
+                            <i class="fas fa-calendar-alt"></i>
+                             Filtres de date (0)
+                        </span>
+                        <i id="chevron-date" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Conteneur des filtres à afficher/masquer -->
+                <div class="filters-date-container" id="filters-date-container">
+
+                    <div class="filter-date-container">
+                        <div class="filter">
+                            <label>Filtrer sur...</label>
+                            <select id="filter-date-options">
+                                <option value="livraison">Date de livraison</option>
+                                <option value="commande">Date de commande</option>
+                                <option value="finProd">Date de fin de production</option>
+                                <option value="fact">Date de facturation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="separator2"></div>
+
+                    <div class="filter-week-container">
+                        <div class="filter-week">
+                            <label for="week-number">Semaine :</label>
+                            <input type="number" id="week-number" placeholder="Ex: 01" min="01" max="52">
+                            
+                            <label for="year">Année :</label>
+                            <input type="number" id="year" placeholder="Ex: 2025" min="2000" max="2050">
+                        </div>
+
+                        <div class="filter-reset">
+                            <button id="filter-button">Filtrer</button>
+                            <button id="reset-button">Annuler</button>
+                        </div>
+                    </div>
+
+                    <div class="separator2"></div>
+
+                    <div class="filter-date-container">
+                        <div class="filter-date">
+                            <label for="start-date">Du</label>
+                            <input type="date" id="start-date">
+                            
+                            <label for="end-date">Au</label>
+                            <input type="date" id="end-date">
+                        </div>
+
+                        <div class="filter-date-reset">
+                            <button id="filter-date-button">Filtrer</button>
+                            <button id="reset-date-button">Annuler</button>
+                        </div>
+                    </div>
+
+                    <div class="separator2"></div>
+
+                    <div class="filter-en-attente-container">
+                        <button class="en-attente" id="en-attente">En attente de délai</button>
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-matiere" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-matiere-text">
+                            <i class="fas fa-cube"></i>
+                            Filtres de matière (0)
+                        </span>
+                        <i id="chevron-matiere" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-matiere-container" id="filters-matiere-container">
+                    <div class="filter-produits-option">
+                        <button id="produits-tous" class="active">Tous</button>
+                        <button id="produits-alu" class="">ALU</button>
+                        <button id="produits-pvc" class="">PVC</button>
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-transp" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-transp-text">
+                            <i class="fas fa-truck"></i>
+                            Filtres de transporteur (0)
+                        </span>
+                        <i id="chevron-transp" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-transp-container" id="filters-transp-container">
+                    <select id="transporteurs">
+                        <!-- Les transporteurs seront injectés ici -->
+                    </select>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-etat" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-etat-text">
+                            <i class="fas fa-check"></i>
+                            Filtres d'état (0)
+                        </span>
+                        <i id="chevron-etat" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-etat-container" id="filters-etat-container">
+                    <div id="etatOptionContainer">
+                        <!-- Les états seront injectés ici -->
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-status" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-status-text">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Filtres de statut (0)
+                        </span>
+                        <i id="chevron-status" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-status-container" id="filters-status-container">
+                    <div class="filter-status-option">
+                        <button id="retards">Retards</button>
+                        <button id="groupage-ports">Groupage/Ports</button>
+                        <button id="attente-paiement">Attente de paiement</button>
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-client" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-client-text">
+                            <i class="fas fa-address-book"></i>
+                            Filtres de client (0)
+                        </span>
+                        <i id="chevron-client" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-client-container" id="filters-client-container">
+                    <div class="search-client">
+                        <div class="search-client-container">
+                            <input type="text" id="search-client" placeholder="Rechercher un client...">
+                            <i id="clear-client-btn" class="fas fa-times"></i>
+                        </div>
+                        <div id="client-list">
+                            <!-- Les clients seront injectés ici -->                            
+                        </div>                        
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div id="toggle-filter-repres" class="toggle-filter">
+                        <!-- Texte avec icône -->
+                        <span id="filter-repres-text">
+                            <i class="fas fa-user-tie"></i>
+                            Filtres de représentant (0)
+                        </span>
+                        <i id="chevron-repres" class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filters-repres-container" id="filters-repres-container">
+                    <select id="representants">
+                        <!-- Les transporteurs seront injectés ici -->
+                    </select>
+                </div>
+
+            </div>
+        </aside>
+
+        <section>
+            <p id="number-of-commands-and-ca"></p>
+            <table>
+                <thead>
+                    <tr id="table-header"></tr>
+                </thead>
+                <tbody id="commandes-list">
+                    <!-- Les commandes seront injectées ici -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Popup de confirmation -->
+    <div id="refresh-popup" class="popup">
+        <div class="popup-content">
+            <p>Plus d'une heure s'est écoulée depuis le dernier rafraîchissement. Certaines commandes peuvent avoir été modifiées ou ajoutées. Voulez-vous rafraîchir la page ?</p>
+            <button id="refresh-yes">Oui</button>
+            <button id="refresh-no">Non</button>
+        </div>
+    </div>
+
+    <div id="leave-popup" class="popup"> 
+        <div class="popup-content">
+            <p>Voulez-vous quitter la GESTCOM ?</p>
+            <button id="leave-yes">Oui</button>
+            <button id="leave-no">Non</button>
+        </div>
+    </div>
+
+    <div id="commande-popup" class="commande-popup">
+        <div class="commande-popup-content">
+            <div class="commande-popup-header">
+                <h2 id="commande-popup-title">Titre de la commande</h2>
+                <span class="commande-popup-close">&times;</span>
+            </div>
+            <div id="commande-popup-details"></div>
+
+        </div>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+    <script type="module" src="/table.js"></script>
+    <script type="module" src="/popup.js"></script>
+    <script type="module" src="/filters.js"></script>
+</body>
+</html>

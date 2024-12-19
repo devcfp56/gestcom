@@ -62,25 +62,41 @@ function setActiveView(viewId) {
         // Modifier la couleur de fond de header .views button.active
         document.styleSheets[0].addRule('#header .views button.active', 'background-color: #4CAF50');
 
-        // Modifier la couleur de fond de header .refresh-button.active
-        document.styleSheets[0].addRule('#header .refresh-button.active', 'background-color: #4CAF50');
-
         // Modifier la couleur de fond de .filters button
-        document.styleSheets[0].addRule('.filters button', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('.filters button', 'background-color: #4CAF50');
 
         // Modifier la couleur de fond de table th
-        document.styleSheets[0].addRule('table th', 'background-color: #4CAF50');
+        document.styleSheets[1].addRule('table th', 'background-color: #4CAF50');
+
+        // Modifier la couleur du nombre de commandes
+        document.getElementById('number-of-commands-and-ca').style.backgroundColor = '#4CAF50';
+
 
         // Modifier la couleur de fond de .popup button
         document.styleSheets[0].addRule('.popup button', 'background-color: #4CAF50');
 
         // Modifier la couleur de fond de aside
-        document.styleSheets[0].addRule('aside', 'background-color: #e6ffe6;');
+        document.styleSheets[2].addRule('aside', 'background-color: #e6ffe6;');
 
         // Modifier la couleur de fond de #produits-alu.active, #produits-pvc.active, #produits-tous.active
-        document.styleSheets[0].addRule('#produits-alu.active', 'background-color: #4CAF50');
-        document.styleSheets[0].addRule('#produits-pvc.active', 'background-color: #4CAF50');
-        document.styleSheets[0].addRule('#produits-tous.active', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('#produits-alu.active', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('#produits-pvc.active', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('#produits-tous.active', 'background-color: #4CAF50');
+
+        // Modifier la couleur de fond de #retards.active, #groupage-ports.active, #attente-paiement.active
+        document.styleSheets[2].addRule('#retards.active', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('#groupage-ports.active', 'background-color: #4CAF50');
+        document.styleSheets[2].addRule('#attente-paiement.active', 'background-color: #4CAF50');
+
+        // Modifier la couleur de fond de .filters .etat-button.active
+        document.styleSheets[2].addRule('.filters .etat-button.active', 'background-color: #4CAF50');
+
+        // Modifier la couleur de fond de #loading-screen et .gestcom
+        document.styleSheets[0].addRule('#loading-screen', 'background-color: #4CAF50');
+        document.styleSheets[0].addRule('.gestcom', 'background-color: #4CAF50');
+
+        // Modifier la couleur de fond de #refresh-button:hover
+        document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #4CAF50');
 
     } else if (viewId === 'adv-view') {
         // Revenir à la couleur bleue (#004d99)
@@ -89,115 +105,222 @@ function setActiveView(viewId) {
         // Modifier la couleur de fond de header .views button.active
         document.styleSheets[0].addRule('#header .views button.active', 'background-color: #004d99');
 
-        // Modifier la couleur de fond de header .refresh-button.active
-        document.styleSheets[0].addRule('#header .refresh-button.active', 'background-color: #004d99');
-
         // Modifier la couleur de fond de .filters button
-        document.styleSheets[0].addRule('.filters button', 'background-color: #004d99');
+        document.styleSheets[2].addRule('.filters button', 'background-color: #004d99');
 
         // Modifier la couleur de fond de table th
-        document.styleSheets[0].addRule('table th', 'background-color: #004d99');
+        document.styleSheets[1].addRule('table th', 'background-color: #004d99');
+
+        // Modifier la couleur du nombre de commandes
+        document.getElementById('number-of-commands-and-ca').style.backgroundColor = '#004d99';
 
         // Modifier la couleur de fond de .popup button
         document.styleSheets[0].addRule('.popup button', 'background-color: #004d99');
 
         // Modifier la couleur de fond de aside
-        document.styleSheets[0].addRule('aside', 'background-color: #e6f7ff;');
+        document.styleSheets[2].addRule('aside', 'background-color: #e6f7ff;');
 
         // Modifier la couleur de fond de #produits-alu.active, #produits-pvc.active, #produits-tous.active
-        document.styleSheets[0].addRule('#produits-alu.active', 'background-color: #004d99');
-        document.styleSheets[0].addRule('#produits-pvc.active', 'background-color: #004d99');
-        document.styleSheets[0].addRule('#produits-tous.active', 'background-color: #004d99');
+        document.styleSheets[2].addRule('#produits-alu.active', 'background-color: #004d99');
+        document.styleSheets[2].addRule('#produits-pvc.active', 'background-color: #004d99');
+        document.styleSheets[2].addRule('#produits-tous.active', 'background-color: #004d99');
+
+        // Modifier la couleur de fond de #retards.active, #groupage-ports.active, #attente-paiement.active
+        document.styleSheets[2].addRule('#retards.active', 'background-color: #004d99');
+        document.styleSheets[2].addRule('#groupage-ports.active', 'background-color: #004d99');
+        document.styleSheets[2].addRule('#attente-paiement.active', 'background-color: #004d99');
+
+        // Modifier la couleur de fond de .filters .etat-button.active
+        document.styleSheets[2].addRule('.filters .etat-button.active', 'background-color: #004d99');
+
+        // Modifier la couleur de fond de #loading-screen et .gestcom
+        document.styleSheets[0].addRule('#loading-screen', 'background-color: #004d99');
+        document.styleSheets[0].addRule('.gestcom', 'background-color: #004d99');
+
+        // Modifier la couleur de fond de #refresh-button:hover
+        document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #004d99');
 
     } else if (viewId === 'prod-view') {
-        // Changer la couleur de l'en-tête en rouge (#FF8C00)
-        document.getElementById('header').style.backgroundColor = '#FF8C00';
+        // Changer la couleur de l'en-tête en rouge (#ffa332)
+        document.getElementById('header').style.backgroundColor = '#ffa332';
 
         // Modifier la couleur de fond de header .views button.active
-        document.styleSheets[0].addRule('#header .views button.active', 'background-color: #FF8C00');
-
-        // Modifier la couleur de fond de header .refresh-button.active
-        document.styleSheets[0].addRule('#header .refresh-button.active', 'background-color: #FF8C00');
+        document.styleSheets[0].addRule('#header .views button.active', 'background-color: #ffa332');
 
         // Modifier la couleur de fond de .filters button
-        document.styleSheets[0].addRule('.filters button', 'background-color: #FF8C00');
+        document.styleSheets[2].addRule('.filters button', 'background-color: #ffa332');
 
         // Modifier la couleur de fond de table th
-        document.styleSheets[0].addRule('table th', 'background-color: #FF8C00');
+        document.styleSheets[1].addRule('table th', 'background-color: #ffa332');
+
+        // Modifier la couleur du nombre de commandes
+        document.getElementById('number-of-commands-and-ca').style.backgroundColor = '#ffa332';
 
         // Modifier la couleur de fond de .popup button
-        document.styleSheets[0].addRule('.popup button', 'background-color: #FF8C00');
+        document.styleSheets[0].addRule('.popup button', 'background-color: #ffa332');
 
         // Modifier la couleur de fond de aside
-        document.styleSheets[0].addRule('aside', 'background-color: #ffe6cc;');
+        document.styleSheets[2].addRule('aside', 'background-color: #ffe6cc;');
 
         // Modifier la couleur de fond de #produits-alu.active, #produits-pvc.active, #produits-tous.active
-        document.styleSheets[0].addRule('#produits-alu.active', 'background-color: #FF8C00');
-        document.styleSheets[0].addRule('#produits-pvc.active', 'background-color: #FF8C00');
-        document.styleSheets[0].addRule('#produits-tous.active', 'background-color: #FF8C00');
+        document.styleSheets[2].addRule('#produits-alu.active', 'background-color: #ffa332');
+        document.styleSheets[2].addRule('#produits-pvc.active', 'background-color: #ffa332');
+        document.styleSheets[2].addRule('#produits-tous.active', 'background-color: #ffa332');
+
+        // Modifier la couleur de fond de #retards.active, #groupage-ports.active, #attente-paiement.active
+        document.styleSheets[2].addRule('#retards.active', 'background-color: #ffa332');
+        document.styleSheets[2].addRule('#groupage-ports.active', 'background-color: #ffa332');
+        document.styleSheets[2].addRule('#attente-paiement.active', 'background-color: #ffa332');
+
+        // Modifier la couleur de fond de .filters .etat-button.active
+        document.styleSheets[2].addRule('.filters .etat-button.active', 'background-color: #ffa332');
+
+        // Modifier la couleur de fond de #loading-screen et .gestcom
+        document.styleSheets[0].addRule('#loading-screen', 'background-color: #ffa332');
+        document.styleSheets[0].addRule('.gestcom', 'background-color: #ffa332');
+
+        // Modifier la couleur de fond de #refresh-button:hover
+        document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #ffa332');
     }
 }
 
-// Faire une requête GET vers le serveur pour obtenir les informations de la semaine en cours et CA
-fetch('/data/semaine-en-cours')
-    .then(response => response.json())
-    .then(data => {
-        // Extraction des valeurs de semaine en cours pour ALU et PVC
-        const semaineAlu = data.GESCOMALU ? data.GESCOMALU[0] : 'Non défini';  // Première valeur de ALU
-        const semainePvc = data.GESCOMPVC ? data.GESCOMPVC[0] : 'Non défini'; // Première valeur de PVC
+/* hide-nav cache nav */
+document.getElementById('hide-nav').addEventListener('click', () => {
+    const nav = document.querySelector('nav');
+    nav.style.display = 'none';
 
-        // Affichage des semaines en cours dans le DOM
-        document.getElementById('alu-doc').textContent = semaineAlu;
-        document.getElementById('pvc-doc').textContent = semainePvc;
+    /* afficher a la place un fin bandeau blanc (id=show-nav qui existe deja) qui affiche nav au survol et réaffiche nav au clic */
+    const showNav = document.getElementById('show-nav');
+    showNav.style.display = 'flex';
 
-        // Extraction des valeurs CA pour ALU et PVC
-        const caAlu = data.GESCOMCAALU ? data.GESCOMCAALU[0] : 0;  // Première valeur du CA pour ALU
-        const caPvc = data.GESCOMCAPVC ? data.GESCOMCAPVC[0] : 0;  // Première valeur du CA pour PVC
+    showNav.addEventListener('click', () => {
+        nav.style.display = 'flex';
+        showNav.style.display = 'none';
+    });
+});
 
-        // Affichage du CA dans le DOM
-        document.getElementById('alu-CA').textContent = caAlu + "€";
-        document.getElementById('pvc-CA').textContent = caPvc + "€";
+document.getElementById("toggle-filter-date").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-date-container");
+    var icon = document.getElementById("chevron-date"); // Sélectionner l'icône chevron
 
-        // Calcul des valeurs "en cours" et "reste"
-        calculateEnCoursReste(caAlu, caPvc, semaineAlu, semainePvc);
-    })
-    .catch(error => console.error('Erreur lors de la récupération des données de la semaine en cours:', error));
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
 
-// Fonction pour calculer le CA en cours et le reste
-function calculateEnCoursReste(caAlu, caPvc, semaineAlu, semainePvc) {
-    // Faire une requête GET vers le serveur pour obtenir les commandes
-    fetch('/commandes')
-        .then(response => response.json())  // Recevoir la réponse sous forme de JSON
-        .then(data => {
-            let caEnCoursAlu = 0;
-            let caEnCoursPvc = 0;
+document.getElementById("toggle-filter-matiere").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-matiere-container");
+    var icon = document.getElementById("chevron-matiere"); // Sélectionner l'icône chevron
 
-            // Parcourir chaque commande et calculer le CA en cours
-            data.forEach(commande => {
-                if (commande.wlivr === semaineAlu) {
-                    caEnCoursAlu += commande.prixportailAlu + commande.prixClotureAlu;  // Ajouter au CA en cours ALU
-                }
-                if (commande.wlivr === semainePvc) {
-                    caEnCoursPvc += commande.prixportailPVC + commande.prixCloturePVC;  // Ajouter au CA en cours PVC
-                }
-            });
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
 
-            // arrondir les valeurs à l'euro le plus proche
-            caEnCoursAlu = Math.round(caEnCoursAlu);
-            caEnCoursPvc = Math.round(caEnCoursPvc);
+document.getElementById("toggle-filter-transp").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-transp-container");
+    // icone chevron
+    var icon = document.getElementById("chevron-transp"); // Sélectionner l'icône chevron
 
-            // Calcul du reste pour ALU et PVC
-            const resteAlu = caAlu - caEnCoursAlu;
-            const restePvc = caPvc - caEnCoursPvc;
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
 
-            // Affichage des résultats dans le DOM
-            document.getElementById('alu-en-cours-reste').textContent = `${caEnCoursAlu} € / ${resteAlu} €`;
-            document.getElementById('pvc-en-cours-reste').textContent = `${caEnCoursPvc} € / ${restePvc} €`;
-        })
-        .catch(error => console.error('Erreur lors de la récupération des commandes:', error));  // Gestion des erreurs
-}
+document.getElementById("toggle-filter-etat").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-etat-container");
+    var icon = document.getElementById("chevron-etat"); // Sélectionner l'icône chevron
 
-/* EASTEREGG PLM */
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
+
+document.getElementById("toggle-filter-status").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-status-container");
+    var icon = document.getElementById("chevron-status"); // Sélectionner l'icône chevron
+
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
+
+document.getElementById("toggle-filter-client").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-client-container");
+    var icon = document.getElementById("chevron-client"); // Sélectionner l'icône chevron
+
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
+
+document.getElementById("toggle-filter-repres").addEventListener("click", function () {
+    var filterContainer = document.getElementById("filters-repres-container");
+    var icon = document.getElementById("chevron-repres"); // Sélectionner l'icône chevron
+
+    if (filterContainer.style.display === "block") {
+        // Masquer le conteneur
+        filterContainer.style.display = "none";
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+    } else {
+        // Afficher le conteneur
+        filterContainer.style.display = "block";
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+    }
+});
+
+
+/* EASTEREGG PLM
 
 // Le clic sur plm-button affiche une popup ou il faut renseigner un code (le code est plm). Si le code est bon on modifie la couleur de fond du header et on ferme la popup, sinon si le code est mauvais on ferme la popup.
 document.getElementById('plm-button').addEventListener('click', () => {
@@ -236,9 +359,9 @@ document.getElementById('plm-button').addEventListener('click', () => {
         header.appendChild(overlay);
 
         // Modifier le fond de aside
-        document.styleSheets[0].addRule('aside', 'background-image: url("https://media.letelegramme.fr/api/v1/images/view/63a70821d11d004878764368/web_golden_xl/63a70821d11d004878764368.1');
-        document.styleSheets[0].addRule('aside', 'background-size: 400px');
-        document.styleSheets[0].addRule('aside', 'background-position: center');
+        document.styleSheets[2].addRule('aside', 'background-image: url("https://media.letelegramme.fr/api/v1/images/view/63a70821d11d004878764368/web_golden_xl/63a70821d11d004878764368.1');
+        document.styleSheets[2].addRule('aside', 'background-size: 400px');
+        document.styleSheets[2].addRule('aside', 'background-position: center');
 
 
         // Ajouter un overlay sombre par-dessus aside
@@ -247,7 +370,7 @@ document.getElementById('plm-button').addEventListener('click', () => {
         document.querySelector('aside').appendChild(overlayAside);
 
         // Supprimer la couleur de fond de aside
-        document.styleSheets[0].addRule('aside', 'background-color: transparent');
+        document.styleSheets[2].addRule('aside', 'background-color: transparent');
 
         // Fermer la popup avec animation de confettis
         closePopupWithConfetti(popupplm);
@@ -330,3 +453,5 @@ document.getElementById('plm-button').addEventListener('click', () => {
         });
     }
   });
+
+  */

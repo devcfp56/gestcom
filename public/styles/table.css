@@ -1,0 +1,320 @@
+/* Section des commandes */
+section {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto;
+    transition: margin-left 0.3s ease;
+    width: 66%;
+    padding-top : 0;
+}
+
+#number-of-commands-and-ca {
+    border-radius: 5px;
+    background-color: #004d99;
+    color: white;
+    padding: 10px;
+    margin-bottom: 16px;
+    /* largeur adaptée au texte */
+    display: inline-block;
+    font-size: 14px;
+}
+
+/* Tableau des commandes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Fixe la largeur des colonnes */
+}
+
+table th.etat, td.etat {
+    padding: 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table td, table th {
+    padding: 20px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    overflow-wrap: break-word; /* Propriété recommandée */
+}
+
+table th {
+    background-color: #004d99;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+#table-header:hover {
+    /* pas pointer car pas cliquable */
+    cursor: default;
+}
+
+/* Alterner la couleur des lignes */
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Couleur pour les lignes paires */
+}
+
+table tr:nth-child(odd) {
+    background-color: #ffffff; /* Couleur pour les lignes impaires */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Couleur au survol */
+    cursor: pointer;
+}
+
+
+tr.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+tr.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+table td {
+    font-size: 14px;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+td.check, th.check {
+    width: 1%; /* Largeur fixe pour la colonne checkbox */
+    text-align: center;
+}
+
+.selected {
+    background-color: #ececec !important; /* Couleur de fond pour les lignes sélectionnées */
+}
+
+/* Style pour la ligne de tableau si la case à cocher est cochée */
+.check input[type="checkbox"]:checked + label, /* Option si label */
+.check input[type="checkbox"]:checked {
+    background-color: #929292;
+    outline: none; /* Supprimer le contour */
+    accent-color: #929292; /* Change la couleur native de la case sur certains navigateurs */
+}
+
+/* Spécifie une largeur fixe pour la colonne "Commentaire" */
+td.commentaire, th.commentaire {
+    width: 12%; /* Largeur fixe pour la colonne commentaire */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "Commande" */
+td.commande, th.commande {
+    width: 5%; /* Largeur fixe pour la colonne commande */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+/* Spécifie une largeur fixe pour la colonne "aravp" */
+td.aravp, th.aravp {
+    width: 5%; /* Largeur fixe pour la colonne aravp */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+/* Spécifie une largeur fixe pour la colonne "CA" */
+td.ca, th.ca {
+    width: 5%; /* Largeur fixe pour la colonne CA */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+/* Spécifie une largeur fixe pour la colonne "semliv" */
+td.semliv, th.semliv {
+    width: 5%; /* Largeur fixe pour la colonne semliv */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+td.transp, th.transp {
+    width: 6%; /* Largeur fixe pour la colonne transp */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+td.dep, th.dep {
+    width: 3%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+td.details, th.details {
+    width: 8%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.client, th.client {
+    width: 10%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+th.dep:hover::after {
+    content: "Département de livraison";
+    position: absolute;
+    top: 100%; /* Positionner le texte juste en dessous de la cellule */
+    left: 0;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+th.semliv:hover::after {
+    content: "Semaine de livraison";
+    position: absolute;
+    top: 100%; /* Positionner le texte juste en dessous de la cellule */
+    left: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Style pour le texte de l'état sous la barre de progression */
+.progress-bar {
+    width: 100%; /* S'assurer que la barre occupe toute la largeur disponible */
+    height: 10px; /* Définir la hauteur de la barre */
+    background-color: #e0e0e0; /* Couleur de fond de la barre (gris clair) */
+    border-radius: 5px; /* Arrondir les bords de la barre */
+    margin-bottom: 5px; /* Espacement entre la barre et le texte */
+
+}
+
+/* Style de la barre de progression proprement dite */
+.progress {
+    height: 100%; /* La hauteur de la barre de progression prend la hauteur définie */
+    border-radius: 5px; /* Arrondir les bords de la barre de progression */
+}
+
+/* Style pour le texte de l'état sous la barre */
+.state-text {
+    text-align: center; /* Centrer le texte sous la barre */
+    font-size: 12px; /* Taille du texte */
+    color: #555; /* Couleur du texte */
+    margin-top: 5px; /* Espacement entre la barre et le texte */
+}
+
+/* Couleurs de la barre de progression en fonction de la largeur */
+/* Couleurs de la barre de progression en fonction de la largeur */
+
+/* Si la progression est entre 0% et 14%, couleur orange doux */
+.progress-bar .progress[style*="width: 0%"], 
+.progress-bar .progress[style*="width: 14%"] {
+    background-color: #ffb74d; /* orange doux */
+}
+
+/* Si la progression est entre 14% et 28%, couleur jaune doux */
+.progress-bar .progress[style*="width: 14%"], 
+.progress-bar .progress[style*="width: 29%"] {
+    background-color: #ffee58; /* jaune doux */
+}
+/* Si la progression est entre 42% et 57%, couleur vert clair */
+.progress-bar .progress[style*="width: 43%"], 
+.progress-bar .progress[style*="width: 57%"] {
+    background-color: #81c784; /* vert clair */
+}
+
+/* Si la progression est entre 57% et 71%, couleur vert moyen */
+.progress-bar .progress[style*="width: 57%"], 
+.progress-bar .progress[style*="width: 71%"] {
+    background-color: #66bb6a; /* vert moyen */
+}
+
+/* Si la progression est entre 71% et 85%, couleur vert plus foncé */
+.progress-bar .progress[style*="width: 71%"], 
+.progress-bar .progress[style*="width: 86%"] {
+    background-color: #43a047; /* vert plus foncé */
+}
+
+/* Si la progression est 100%, couleur vert foncé */
+.progress-bar .progress[style*="width: 100%"] {
+    background-color: #388e3c; /* vert foncé */
+}
+
+
+/* responsive pour les écrans moyens (passer de 14px à 12px) */
+@media (max-width: 1919px) {
+    table th {
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    table td {
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    section {
+        font-size: 14px;
+    }
+
+    #number-of-commands-and-ca {
+        margin-bottom: 14px;
+        font-size: 12px;
+    }
+}
+
+
+/* responsive pour les petits écrans (passer de 12px à 10px) */
+@media (max-width: 1601px) {
+    table th {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    table td {
+        font-size: 10px;
+        padding: 10px;
+    }
+
+    section {
+        font-size: 12px;
+    }
+
+    /* Ne pas afficher la barre de progression sur les petits écrans */
+    .progress-bar {
+        display: none;
+    }
+
+    #number-of-commands-and-ca {
+        margin-bottom: 12px;
+        font-size: 10px;
+    }
+}

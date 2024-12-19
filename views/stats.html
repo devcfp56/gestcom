@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESPACE CFP</title>
+    <link rel="icon" href="https://pro.cfp56.com/wp-content/uploads/2022/06/Rectangle_Vector-150x73.png" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;900&display=swap" rel="stylesheet">
+    <style>/* Global Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden; /* Empêche le défilement global */
+            background-color: #f3f3f3;
+        }
+        
+
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #004d99;
+            background-size: 400% 400%;
+            animation: gradientAnimation 4s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #loading-text {
+            font-size: 24px;
+            color: white;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: white;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Nav */
+        nav {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #fff; /* Couleur unie pour le bandeau */
+            padding: 20px; /* Espace vertical dans le bandeau */
+            height: 25px; /* Hauteur du bandeau */
+            gap: 40px; /* Espacement entre les éléments */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        #logo-cfp {
+            height: 30px;
+        }
+
+        /* Style des liens dans la navigation */
+        nav a {
+            text-decoration: none; /* Supprimer le soulignement des liens */
+            color: #333; /* Couleur du texte */
+            font-size: 14px; /* Taille de la police */
+            padding: 5px 10px; /* Espacement intérieur (ajouté horizontal pour maintenir la taille des cases) */
+            border: 1px solid transparent; /* Bordure invisible pour conserver la taille */
+            display: inline-block; /* Garde l'élément sur une ligne */
+            text-align: center; /* Centrer le texte */
+            transition: all 0.2s ease; /* Transition douce pour l'effet de survol */
+            box-sizing: border-box; /* Inclut le padding et la bordure dans la taille totale */
+            border-radius: 5px; /* Coins arrondis */
+        }
+
+        /* Exclure le lien autour de l'image du logo de la bordure */
+        nav a:first-child {
+            border: none; /* Enlever la bordure du lien contenant l'image */
+        }
+
+        /* Effet au survol */
+        nav a.active {
+            border-color: #333; /* Ajouter une bordure colorée pour l'effet de survol */
+        }
+
+        nav a:hover {
+            border-color: #333; /* Ajouter une bordure colorée pour l'effet de survol */
+        }
+
+        .x {
+            font-size: 20px;
+            border: none;
+            /* à l'extrême droite */
+            margin-left: auto;
+            cursor: pointer;
+            color: #333;
+            background-color: white;
+        }
+
+        .x:hover {
+            color: #e74c3c;
+        }
+
+        #show-nav {
+            width: 100%;
+            height: 25px;
+            display: none;
+            background-color: #fff;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #show-nav:hover {
+            cursor: pointer;
+        }
+
+        #show-nav button {
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+            background-color: #fff;
+            padding: 5px;
+        }
+        
+        #home-header h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 100px;
+            flex: 1;
+        }
+
+        #stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .group h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        #leave-popup {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Assurer qu'elle est au-dessus des autres éléments */
+        }
+
+        #leave-yes {
+            background-color: #004d99;
+            color: white;
+            margin-right: 10px; /* Espacement à droite entre les boutons */
+            border: 1px solid #004d99;
+        }
+
+        #leave-no {
+            background-color: white;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+        /* Style de la popup */
+        .popup {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Assurer qu'elle est au-dessus des autres éléments */
+        }
+
+        /* Contenu de la popup */
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .popup p {
+            margin-top: 0;
+        }
+
+        button, input[type="text"], input[type="checkbox"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+
+        #evolution-month-info {
+            font-size: 1rem;
+            color: #555;
+            /* espacement entre les éléments en ligne */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Lancer l'animation quand la classe 'start-animation' est ajoutée */
+        #gestcom.start-animation {
+            animation: zoomInOut 2s ease-in-out forwards;
+        }
+
+        /* Animation du texte */
+        #gestcom {
+            font-size: 80px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: white;
+        }
+
+        /* Définition de l'animation zoom durée */
+        @keyframes zoomInOut {
+            0% {
+                transform: scale(0); /* Très petit au départ */
+                opacity: 1;
+            }
+            25% {
+                transform: scale(1); /* Taille normale après 1 seconde */
+            }
+            50% {
+                transform: scale(1); /* Maintenir la taille normale */
+            }
+            75% {
+                transform: scale(1); /* Maintenir la taille normale */
+                opacity: 1;
+            }
+            85% {
+                opacity: 0;
+            }
+            100% {
+                transform: scale(800); /* Augmenter la taille à 800% */
+                opacity: 0;
+            }
+        }
+
+
+        /* Lancer l'animation quand la classe 'start-animation' est ajoutée */
+        #gestcom.start-animation {
+            animation: zoomInOut 2s ease-in-out forwards;
+        }
+
+        /* Laisser un fond visible pendant l'animation */
+        .gestcom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            z-index: 1000;
+            background: #004d99;
+            background-size: 400% 400%;
+            animation: gradientAnimation 4s ease infinite;
+        }
+
+</style>
+</head>
+<body>
+    <nav id="nav">
+        <a href="/">
+            <img src="images/Logo_CFP_CMJN.jpg" alt="Logo CFP" id="logo-cfp">
+        </a>
+        <a href="/">ACCUEIL</a>
+        <a href="/gestcom">GESTCOM</a>
+        <a class="active" href="/stats">STATS</a>
+        <a href="/parametres">PARAMÈTRES</a>
+        <button id="hide-nav" class="x">&times;</button>
+    </nav>
+    
+    <button id="show-nav" id="chevron" class="fas fa-chevron-down"></button>
+
+    <main>
+        <h1>Statistiques</h1>
+        <section id="stats-container">
+
+            <!-- Groupe 2 : Chiffre d'Affaires Année en cours -->
+            <div class="group">
+                <h2>CA de l'Année en cours & Évolution (par rapport à l'année précédente)</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>CA Alu (Année en cours)</h3>
+                        <p id="ca-total-alu-this-year">0 €</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>CA PVC (Année en cours)</h3>
+                        <p id="ca-total-pvc-this-year">0 €</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Évolution Alu (%)</h3>
+                        <p id="evolution-alu-percent">0 %</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Évolution PVC (%)</h3>
+                        <p id="evolution-pvc-percent">0 %</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groupe 4 : Mois en cours -->
+            <div class="group">
+                <h2>CA du Mois en cours (des commandes reçues) & Évolution (par rapport au mois précédent)</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-calendar"></i></div>
+                        <h3 id="current-month">CA Total (Mois en cours)</h3>
+                        <p id="ca-total-this-month">0 €</p>
+                        <p id="nb-commandes-this-month">Nombre de commandes : 0</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Évolution CA</h3>
+                        <p id="evolution-month-percent">0 %</p>
+                        <p id="evolution-month"> (0 €)</p>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="leave-popup" class="popup"> 
+        <div class="popup-content">
+            <p>Voulez-vous vraiment quitter ?</p>
+            <button id="leave-yes">Oui</button>
+            <button id="leave-no">Non</button>
+        </div>
+    </div>
+    
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p id="loading-text">Chargement des statistiques...</p>
+    </div>
+
+    <div id="gestcom-container" class="gestcom" style="display: none;">
+        <div id="gestcom">GESTCOM</div>
+    </div>
+
+    <script type="module" src="/stats.js"></script>
+</body>
+</html>

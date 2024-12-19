@@ -1,0 +1,526 @@
+/* Volet des filtres */
+aside {
+    background-color: #e6f7ff;
+    width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
+    width: 12%;
+    height: auto;
+}
+
+.aside-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6); /* Fond noir semi-transparent */
+    z-index: 1; /* Assurer que l'overlay est au-dessus de l'image de fond */
+}
+
+aside * {
+    position: relative; /* S'assurer que le texte et autres éléments sont au-dessus de l'overlay */
+    z-index: 2;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    margin-bottom: 10px;
+}
+
+aside ul li input {
+    margin-right: 8px;
+}
+
+/* Style pour le conteneur principal des filtres */
+.filters-header {
+    padding: 20px;
+    position: relative; /* Positionnement relatif pour le séparateur */
+    background-color: white;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1); /* Ombre sous le conteneur */
+    margin-bottom: 0; /* Espacement en bas du conteneur */
+}
+
+/* Style pour l'icône de filtre */
+.filters-header i.fas.fa-filter {
+    margin-right: 10px; /* Espacement entre l'icône et le texte */
+    color: #333; /* Couleur de l'icône */
+}
+
+/* Style pour le titre */
+.filters-header h2 {
+    margin: 0; /* Supprimer les marges par défaut */
+    font-size: 20px; /* Taille de la police */
+    display: inline; /* Afficher en ligne pour aligner l'icône et le texte */
+}
+
+/* Style pour l'icône de suppression (poubelle) */
+.filters-header i#clear-all {
+    cursor: pointer;
+    position: absolute; /* Positionnement absolu pour placer l'icône à droite */
+    right: 20px; /* Espacement à droite */
+    top: 50%; /* Aligner l'icône verticalement */
+    transform: translateY(-50%); /* Déplacer l'icône de moitié de sa hauteur vers le haut */
+    color: #333; /* Couleur de l'icône */
+    transition: color 0.2s ease; /* Transition de couleur au survol */
+}
+
+/* Étendre le séparateur sur toute la largeur */
+.separator::before {
+    content: '';
+    position: absolute;
+    top: 0;  /* Positionner au niveau du séparateur */
+    left: -20px;  /* Déplacer légèrement à gauche pour toucher les bords */
+    width: calc(100% + 40px); /* Largeur totale incluant le padding */
+    height: 1px;  /* Hauteur du séparateur */
+    background-color: #333;  /* Couleur de la ligne */
+    box-sizing: border-box;  /* Inclure les marges dans le calcul de la largeur */
+    z-index: -1;  /* S'assurer qu'il se trouve derrière les autres éléments */
+}
+
+/* Conteneur pour chaque filtre individuel */
+.filters {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Étiquettes des champs de filtre */
+label {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+    display: block;
+}
+
+
+.filter-container {
+    display: block;
+    border-bottom: 1px solid #333;
+    background-color: white;
+}
+
+.filters input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filters-matiere-container, .filters-status-container, .filters-client-container {
+    display: none;
+    transition: max-height 0.3s ease-out;
+    border-bottom: 1px solid #333;
+}
+
+.filter-produits {
+    padding: 20px;
+}
+
+.filters-transp-container, .filters-repres-container {
+    display: none;
+    transition: max-height 0.3s ease-out;
+    border-bottom: 1px solid #333;
+    padding: 20px;
+}
+
+.filters-etat-container {
+    display: none;
+    transition: max-height 0.3s ease-out;
+    border-bottom: 1px solid #333;
+    padding: 20px;
+}
+
+.filter-en-attente-container {
+    padding: 20px;
+}
+
+.filter-produits-option, .filter-status-option {
+    display: flex;
+    justify-content: flex-start; /* Aligne les éléments à gauche */
+    gap: 10px; /* Espace entre les éléments */
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+    margin: 20px;
+    width: 100%;
+}
+
+#produits-alu, #produits-pvc, #produits-tous, #retards, #groupage-ports, #attente-paiement {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 20px; /* Ajouter de l'espace à l'intérieur des boutons */
+    text-align: center; /* Centrer le texte dans le bouton */
+    white-space: nowrap; /* Empêche le texte de se couper sur plusieurs lignes */
+    width: auto; /* Ajuster la largeur automatiquement */
+}
+
+#produits-alu.active, #produits-pvc.active, #produits-tous.active, #retards.active, #groupage-ports.active, #attente-paiement.active {
+    background-color: #004d99;
+    color: white;
+}
+
+.filter-date-container {
+    padding: 20px;
+}
+
+.filter-week-container {
+    padding: 20px;
+}
+
+.filter-week {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
+    grid-template-rows: auto auto; /* Deux lignes automatiquement ajustées */
+    gap: 10px; /* Espace entre les éléments */
+    width: 100%;
+    max-width: 400px; /* Limiter la largeur maximale du conteneur si nécessaire */
+}
+
+.filter-week input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+/* Alignement des éléments dans la grille */
+.filter-week #week-number {
+    grid-column: 1; /* Colonne 1 */
+    grid-row: 2; /* Ligne 1 */
+}
+
+.filter-week #year {
+    grid-column: 2; /* Colonne 2 */
+    grid-row: 2; /* Ligne 1 */
+    margin-top: 0; /* Supprimer l'espacement supérieur */
+}
+
+.filter-reset {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* filter-date */
+.filter-date {
+    display: grid; /* Utilisation de la grille */
+    grid-template-columns: auto 1fr; /* Deux colonnes de largeur égale */
+    column-gap: 10px; /* Espacement entre label et input */
+    row-gap: 10px; /* Espacement entre les lignes */
+    max-width: 400px; /* Largeur maximale optionnelle */
+    margin: 0 auto; /* Centrer le conteneur */
+}
+
+.filter-date label {
+    align-self: center; /* Centre verticalement le texte des labels */
+}
+
+.filter-date input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    width: 100%; /* S'assure que l'input prend toute la largeur disponible */
+}
+
+.filter-date-reset {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px; /* Ajoute de l'espace au-dessus des boutons */
+}
+
+
+/* Style du bouton de réinitialisation */
+#reset-date-button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+
+
+/* Boutons */
+.filters button {
+    padding: 10px;
+    background-color: #004d99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Style du bouton de réinitialisation */
+#reset-button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* select id=transporteurs */
+#transporteurs, #representants {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#filter-date-options {
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#etatOptionContainer {
+    display: grid;
+    gap: 5px;
+}
+
+.etat-button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.etat-button.active {
+    background-color: #004d99;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+
+#en-attente {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+#en-attente.active {
+    background-color: #004d99;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Par défaut, le filtre est caché */
+.filters-date-container {
+    display: none;
+    transition: max-height 0.3s ease-out;
+    border-bottom: 1px solid #333;
+}
+
+.filter-container span {
+    margin: 0;
+    margin-right: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: bold;
+}
+
+#filters-date-container.show {
+    display: block; /* Afficher le conteneur */
+    opacity: 1; /* Complètement visible */
+}
+
+
+.toggle-filter {
+    display: flex;
+    align-items: center; /* Alignement vertical */
+    justify-content: space-between; /* Icône de flèche à droite */
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: 1px solid #ddd; /* Optionnel : séparation */
+}
+
+.toggle-filter span {
+    display: flex;
+    align-items: center; /* Alignement vertical des icônes et textes */
+    gap: 8px; /* Espacement entre l'icône et le texte */
+}
+
+/* Taille uniforme pour toutes les icônes dans les titres */
+.toggle-filter i.fas {
+    width: 20px; /* Largeur fixe pour toutes les icônes */
+    text-align: center; /* Centre l'icône dans l'espace */
+}
+
+/* Aligne l'icône à côté du texte proprement */
+#filter-date-text, #filter-matiere-text, #filter-status-text, #filter-client-text, #filter-transp-text, #filter-etat-text, #filter-en-attente-text, #filter-repres-text {
+    display: flex;
+    align-items: center; /* Aligne verticalement l'icône et le texte */
+    gap: 8px; /* Espacement entre l'icône et le texte */
+}
+
+.filter-date-toggle {
+    margin: 0 auto; /* Centrer le texte */
+    text-align: center; /* S'assurer que le texte est bien centré */
+}
+
+.toggle-filter i {
+    margin-left: auto; /* Place l'icône tout à droite */
+}
+
+.separator2 {
+    width: 100%;
+    border-bottom: 1px solid #333;
+}
+
+.search, .search-client {
+    font-size: 14px;
+    white-space: nowrap; /* Évite les retours à la ligne */
+    padding: 20px;
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    display: block; /* Utilise block pour un comportement plus prévisible */
+}
+
+.search {
+    border-bottom: 1px solid #333;
+}
+
+.search h3 {
+    font-size: 16px; /* Taille de la police */
+    margin: 0; /* Supprime les marges par défaut */
+    margin-bottom: 10px; /* Ajoute un espace en bas */
+    
+    display: flex;
+    align-items: center; /* Alignement vertical des icônes et textes */
+    gap: 8px; /* Espacement entre l'icône et le texte */
+}
+
+.search-container, .search-client-container {
+    display: inline-block; /* Utilise inline-block pour garder le contenu dans la largeur disponible */
+    width: 100%; /* Prend toute la largeur de .search */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+.search input, .search-client input {
+    width: calc(100% - 40px); /* Prend toute la largeur, en retirant l'espace occupé par l'icône */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+}
+
+#clear-btn, #clear-client-btn {
+    padding: 8px 12px; /* Ajoute de l'espace autour de l'icône */
+    color: #555;
+    background-color: #f1f1f1; /* Couleur de fond */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer; /* Change le curseur en pointeur */
+    display: inline-flex; /* Centre l'icône dans le bouton */
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+}
+
+#clear-btn:hover, #clear-client-btn:hover {
+    background-color: #ddd; /* Effet au survol */
+}
+
+#client-list {
+    padding: 0;
+    max-height: 300px; /* Limite la hauteur pour éviter que la liste prenne toute la page */
+    overflow-y: auto; /* Ajoute une barre de défilement verticale si la liste dépasse la hauteur définie */
+    border-radius: 4px; /* Arrondit les coins de la liste */
+    background-color: #fff; /* Fond blanc pour la liste */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+}
+
+.client-list-item {
+    padding: 10px; /* Ajoute de l'espace autour de chaque élément */
+    font-size: 14px; /* Taille de police */
+    border-bottom: 1px solid #eee; /* Sépare chaque client par une ligne fine */
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+    transition: background-color 0.2s ease; /* Transition pour l'effet de survol */
+}
+
+.client-list-item:hover {
+    background-color: #f5f5f5; /* Change la couleur de fond lorsque l'on survole un élément */
+}
+
+.client-list-item:last-child {
+    border-bottom: none; /* Retire la bordure du dernier élément */
+}
+
+
+@media (max-width: 1919px) {
+    button, input[type="text"], input[type="checkbox"] {
+        font-size: 12px;
+    }
+
+    #filters-panel h2 {
+        font-size: 14px;
+    }
+
+    .filters label {
+        font-size: 12px;
+    }
+
+    .filters input {
+        font-size: 12px;
+    }
+
+    .filter-reset, .filter-date-reset {
+        gap: 10px;
+    }
+
+    .filter-reset button {
+        width: 100%;
+    }
+
+    .filter-reset button:last-child {
+        margin-bottom: 0;
+    }
+
+    .filter-produits-option {
+        max-width: 100%; /* Ajuster la largeur maximale */
+    }
+
+    .filters button {
+        font-size: 12px;
+    }
+
+    .filter-container span {
+        font-size: 12px;
+    }
+
+    #filter-date-options {
+        font-size: 12px;
+    }
+
+}

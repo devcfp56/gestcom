@@ -32,12 +32,33 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
+// Route de la gestcom
+app.get('/gestcom', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'gestcom.html'));
+});
+
+// Route de la page stats
+app.get('/stats', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'stats.html'));
+});
+
+// Route de la page paramètres
+app.get('/parametres', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'parametres.html'));
+});
+
 // Importer les routes
 const commandesRoutes = require('./routes/commandes');
 app.use('/commandes', commandesRoutes);
 
 const dataRoutes = require('./routes/data');
 app.use('/data', dataRoutes);
+
+const docRoutes = require('./routes/doc');
+app.use('/doc', docRoutes);
+
+const pdfRoutes = require('./routes/pdf');
+app.use('/pdf', pdfRoutes);
 
 // Servir les fichiers statiques (HTML, CSS, JS, vidéo, etc.)
 app.use(express.static(path.join(__dirname, 'public')));

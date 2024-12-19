@@ -1,13 +1,15 @@
+/*1588px / 766px*/
+
 /* Bandeau en haut */
 header {
     font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
+    padding: 20px;
     background-color: #004d99;
     color: white;
-    gap: 30px; /* Espacement entre les groupes */
+    gap: 45px; /* Espacement entre les groupes */
     flex-wrap: wrap; /* Gestion pour petits écrans */
     position: relative; /* Positionnement relatif pour l'overlay */
 }
@@ -29,9 +31,11 @@ header p {
 
 header .infos p {
     margin-bottom: 10px;
+    margin-top: 0;
 }
 
 header h3 {
+    font-size: 16px;
     margin-top: 0;
     flex-shrink: 0;
 }
@@ -39,7 +43,10 @@ header h3 {
 header .views {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: white;
 }
 
 header .views button {
@@ -52,31 +59,32 @@ header .views button {
     cursor: pointer;
     font-size: 14px;
     white-space: nowrap;
-    border: 1px solid white;
 }
 
 header .views button.active {
     background-color: #004d99;
     color: white;
-    border: 1px solid white;
 }
 
 header .views  #adv-view:hover {
     background-color: #004d99;
     color: white;
-    border: 1px solid white;
+    /* Ajouter une transition pour un effet de survol plus doux */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header .views #prod-view:hover {
-    background-color: #FF8C00;
+    background-color: #ffa332;
     color: white;
-    border: 1px solid white;
+    /* Ajouter une transition pour un effet de survol plus doux */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header .views #livr-view:hover {
     background-color: #4CAF50;
     color: white;
-    border: 1px solid white;
+    /* Ajouter une transition pour un effet de survol plus doux */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header .refresh-button {
@@ -150,28 +158,58 @@ header .update-current-week {
 header .infos {
     font-size: 14px;
     white-space: nowrap;
-    margin-left: auto; /* Pousse les infos à l'extrême droite */
+    margin-left: auto;
 }
 
-.mode-toggle {
-    display: flex;
-    align-items: center;
-}
+/* Ecran de bureau plus petit */
+@media (max-width: 1700px) {
 
-#theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+    header h3 {
+        font-size: 14px;
+    }
 
-#theme-toggle img {
-    width: 24px;
-    height: 24px;
-}
+    header .ca-info {
+        font-size: 11px;
+    }
 
-/* responsive pour les grands écrans */
-@media (min-width: 2029px) {
+    header .ca-info p {
+        padding: 5px 10px;
+    }
+
+    header .update-current-week {
+        font-size: 11px;
+    }
+
+    header .infos {
+        font-size: 11px;
+    }
+
+    header .search input,
+    header .sorting select {
+        font-size: 11px;
+        padding: 5px 10px;
+        width: 100px;
+        height: 30px;
+        line-height: 20px;
+    }
+
+    header .views {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    header .views button {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    header .refresh-button {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
     header {
-        gap: 50px;
+        gap: 25px;
+        padding: 15px 15px;
     }
 }

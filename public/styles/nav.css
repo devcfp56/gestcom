@@ -1,0 +1,77 @@
+/* Nav */
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff; /* Couleur unie pour le bandeau */
+    padding: 20px; /* Espace vertical dans le bandeau */
+    height: 25px; /* Hauteur du bandeau */
+    gap: 40px; /* Espacement entre les éléments */
+    font-weight: 600;
+}
+
+#logo-cfp {
+    height: 30px;
+}
+
+/* Style des liens dans la navigation */
+nav a {
+    text-decoration: none; /* Supprimer le soulignement des liens */
+    color: #333; /* Couleur du texte */
+    font-size: 14px; /* Taille de la police */
+    padding: 5px 10px; /* Espacement intérieur (ajouté horizontal pour maintenir la taille des cases) */
+    border: 1px solid transparent; /* Bordure invisible pour conserver la taille */
+    display: inline-block; /* Garde l'élément sur une ligne */
+    text-align: center; /* Centrer le texte */
+    transition: all 0.2s ease; /* Transition douce pour l'effet de survol */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la taille totale */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+/* Exclure le lien autour de l'image du logo de la bordure */
+nav a:first-child {
+    border: none; /* Enlever la bordure du lien contenant l'image */
+}
+
+/* Effet au survol */
+nav a.active {
+    border-color: #333; /* Ajouter une bordure colorée pour l'effet de survol */
+}
+
+nav a:hover {
+    border-color: #333; /* Ajouter une bordure colorée pour l'effet de survol */
+}
+
+.x {
+    font-size: 20px;
+    border: none;
+    /* à l'extrême droite */
+    margin-left: auto;
+    cursor: pointer;
+    color: #333;
+}
+
+.x:hover {
+    color: #e74c3c;
+}
+
+#show-nav {
+    width: 100%;
+    height: 25px;
+    display: none;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+#show-nav:hover {
+    cursor: pointer;
+}
+
+#show-nav button {
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    background-color: #fff;
+    padding: 5px;
+}
