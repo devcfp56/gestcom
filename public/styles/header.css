@@ -59,6 +59,7 @@ header .views button {
     cursor: pointer;
     font-size: 14px;
     white-space: nowrap;
+    border: 1px solid #333;
 }
 
 header .views button.active {
@@ -124,7 +125,6 @@ header .sorting select {
     border: 1px solid white; /* Bordure */
     background-color: white; /* Fond */
     padding: 5px 10px; /* Espacement intérieur */
-    width: 150px; /* Largeur fixe */
     height: 35px; /* Hauteur fixe */
     line-height: 24px; /* Hauteur de la ligne pour aligner le texte */
     box-sizing: border-box; /* Inclut padding et bordure dans la taille totale */
@@ -133,6 +133,13 @@ header .sorting select {
 }
 
 .ca-infos {
+    display: flex;
+    gap: 10px;
+    /* colle en bas */
+    align-items: flex-end;
+}
+
+.ca-infos-top {
     display: flex;
     gap: 10px;
 }
@@ -161,55 +168,166 @@ header .infos {
     margin-left: auto;
 }
 
+header .modif-semaine {
+    max-width: 80px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    border: 1px solid white;
+    text-align: center;
+    /* aligner le texte au centre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    bottom: 0;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+header .modif-semaine p {
+    margin: 0;
+}
+
+header .modif-semaine:hover {
+    background-color: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    animation: bounce 0.5s ease-out;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+.modif-semaine-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 66%;
+    min-width: 33%;
+    margin: auto; /* Centrer horizontalement */
+}
+
+.modif-semaine-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 0;
+}
+
+.modif-semaine-content h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.modif-semaine-alu,
+.modif-semaine-pvc {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+
+}
+
+.modif-semaine-alu p,
+.modif-semaine-pvc p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.modif-semaine-alu input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: calc(100% - 16px);
+}
+
+.modif-semaine-pvc input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: calc(100% - 16px);
+}
+
+.modif-semaine-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modif-semaine-buttons button {
+    padding: 8px 15px;
+    background-color: white;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    border: 1px solid white;
+}
+
+#modif-semaine-button {
+    border: 1px solid #333;
+}
+
+#modif-semaine-button:hover {
+    background-color: #e6e6e6;
+}
+
+#infos-adv {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Ecran de bureau plus petit */
-@media (max-width: 1700px) {
+@media (max-width: 1920px) {
 
     header h3 {
         font-size: 14px;
     }
 
-    header .ca-info {
-        font-size: 11px;
-    }
-
-    header .ca-info p {
-        padding: 5px 10px;
-    }
-
-    header .update-current-week {
-        font-size: 11px;
-    }
-
-    header .infos {
-        font-size: 11px;
-    }
-
-    header .search input,
-    header .sorting select {
-        font-size: 11px;
-        padding: 5px 10px;
-        width: 100px;
-        height: 30px;
-        line-height: 20px;
-    }
-
-    header .views {
-        padding: 5px;
-        gap: 5px;
+    header p {
+        font-size: 12px;
     }
 
     header .views button {
-        padding: 5px 8px;
-        font-size: 11px;
+        font-size: 12px;
+    }
+
+    header .search input, header .sorting select {
+        font-size: 12px;
+        padding: 5px;
     }
 
     header .refresh-button {
-        padding: 8px 12px;
-        font-size: 11px;
+        font-size: 12px;
     }
 
-    header {
-        gap: 25px;
-        padding: 15px 15px;
+    header .modif-semaine {
+        height: 50px;
     }
 }

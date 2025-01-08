@@ -24,25 +24,25 @@ db.connect((err) => {
   }
 });
 
+// Middleware pour analyser le corps des requêtes
+app.use(express.json());
+
 // Configurer le dossier public pour les fichiers statiques (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Route principale
+// Routes statiques
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Route de la gestcom
 app.get('/gestcom', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'gestcom.html'));
 });
 
-// Route de la page stats
 app.get('/stats', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'stats.html'));
 });
 
-// Route de la page paramètres
 app.get('/parametres', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'parametres.html'));
 });
@@ -59,6 +59,9 @@ app.use('/doc', docRoutes);
 
 const pdfRoutes = require('./routes/pdf');
 app.use('/pdf', pdfRoutes);
+
+const mailRoutes = require('./routes/mail');
+app.use('/mail', mailRoutes);
 
 // Servir les fichiers statiques (HTML, CSS, JS, vidéo, etc.)
 app.use(express.static(path.join(__dirname, 'public')));

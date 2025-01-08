@@ -57,27 +57,37 @@
                 <option value="ca">Chiffre d'affaires</option>
             </select>
         </div>
-    
-        <!-- Informations de la semaine en cours -->
-        <div class="ca-infos">
-            <!-- Infos de la semaine en cours -->
-            <div class="ca-info">
-                <h3>Semaine en cours</h3>
-                <p>ALU : <span id="alu-doc">-</span></p>
-                <p>PVC : <span id="pvc-doc">-</span></p>
+
+        <div id="infos-adv"> 
+            <!-- Informations de la semaine en cours -->
+            <div class="ca-infos">
+                <!-- Infos de la semaine en cours -->
+                <div class="ca-info">
+                    <h3>Semaine en cours</h3>
+                    <p>ALU : <span id="alu-doc">-</span></p>
+                    <p>PVC : <span id="pvc-doc">-</span></p>
+                </div>
+
+                <div class="ca-info">
+                    <h3>CA</h3>
+                    <p><span id="alu-CA">-</span></p>
+                    <p><span id="pvc-CA">-</span></p>
+                </div>
+
+                <div class="ca-info">
+                    <h3>En cours / Reste</h3>
+                    <p><span id="alu-en-cours-reste">-</span></p>
+                    <p><span id="pvc-en-cours-reste">-</span></p>
+                </div>
+
+                <!-- Bouton de modification de la semaine en cours -->
+                <div class="ca-infos">
+                    <div class="modif-semaine" id="modif-semaine">
+                        <p>Modifier la semaine en cours</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="ca-info">
-                <h3>CA</h3>
-                <p><span id="alu-CA">-</span></p>
-                <p><span id="pvc-CA">-</span></p>
-            </div>
-
-            <div class="ca-info">
-                <h3>En cours / Reste</h3>
-                <p><span id="alu-en-cours-reste">-</span></p>
-                <p><span id="pvc-en-cours-reste">-</span></p>
-            </div>
         </div>
 
         <div class="ca-info">
@@ -86,7 +96,7 @@
             <p><span id="ca-fac">Facturés :</span></p>
         </div>
 
-        <div class="ca-infos">
+        <div class="ca-infos-top">
             <div class="ca-info">
                 <h3>Portails + Clotures</h3>
                 <p><span id="ca-portails-clotures-alu">ALU :</span></p>
@@ -121,6 +131,11 @@
     </header>
 
     <main>
+        <div id="dev-en-cours">
+            <h2>Développement en cours</h2>
+            <p>La vue "PROD" est en cours de développement. Elle sera disponible prochainement.</p>
+        </div>
+
         <aside id="filters-panel" class="expanded">
 
             <div class="filters-header">
@@ -325,7 +340,30 @@
         </aside>
 
         <section>
-            <p id="number-of-commands-and-ca"></p>
+
+            <div class="header-actions">
+
+                <p id="number-of-commands-and-ca"></p>
+
+                <div id="actions-prod">
+                    <button id="plan-alu">Planning ALU</button>
+                    <button id="plan-pvc">Planning PVC</button>
+                    <button id="plan-embal">Planning Emballage</button>
+                    <button id="previsionnel">Prévisionnel</button>
+                    <button id="encours-inv">En cours d'inventaire</button>
+                </div>
+
+                <div id="actions-livr">
+                    <p id="number-of-selected">Nombre de commandes sélectionnées : 0</p>
+                    <button id="select-all">Tout sélectionner</button>
+                    <button id="select-all-correze">Tout sélectionner sauf CORREZE</button>
+                    <button id="mail-bl">Envoyer mail BL</button>
+                    <button id="mail-paiement">Paiement avant fabrication</button>
+                    <button id="relance-paiement">Relance paiement</button>
+                </div>
+
+            </div>
+
             <table>
                 <thead>
                     <tr id="table-header"></tr>
@@ -365,9 +403,154 @@
         </div>
     </div>
 
+    <div id="modif-semaine-popup" class="popup">
+        <div class="modif-semaine-popup-content">
+            <div class="commande-popup-header">
+                <h2>Modifier la semaine en cours</h2>
+                <span id="modif-semaine-popup-close" class="commande-popup-close">&times;</span>
+            </div>
+
+            <div class="modif-semaine-content">
+
+                <div class="modif-semaine-alu">
+                    <p>ALU</p>
+
+                    <label for="week-number">Semaine :</label>
+                    <input type="number" id="week-number-alu" placeholder="Ex: 01" min="01" max="52">
+                    
+                    <label for="year">Année :</label>
+                    <input type="number" id="year-alu" placeholder="Ex: 2025" min="2000" max="2050">
+                </div>
+
+                <div class="modif-semaine-pvc">
+                    <p>PVC</p>
+
+                    <label for="week-number">Semaine :</label>
+                    <input type="number" id="week-number-pvc" placeholder="Ex: 01" min="01" max="52">
+
+                    <label for="year">Année :</label>
+                    <input type="number" id="year-pvc" placeholder="Ex: 2025" min="2000" max="2050">
+                </div>
+            
+            </div>
+
+            <div class="modif-semaine-buttons">
+                <button id="modif-semaine-button">Modifier</button>
+                <button id="modif-semaine-reset">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mail-bl-popup" class="popup">
+        <div class="mail-bl-popup-content">
+            <div class="commande-popup-header">
+                <h2>Envoyer mail BL</h2>
+                <span id="mail-bl-popup-close" class="commande-popup-close">&times;</span>
+            </div>
+
+            <p id="mail-text">Envoyer le mail BL des X commandes sélectionnées ?</p>
+
+            <div class="mail-bl-content">
+                <p id="mail-subject">Objet du mail : CFP - BON de LIVRAISON N°: *Num BL* de la commande *Num Commande* : *Ref*</p>
+                <p id="mail-body">Bonjour,<br><br>
+
+                    Veuillez trouver ci-joint votre <b>BON DE LIVRAISON</b> suivant la référence en objet.<br><br>
+                
+                    La marchandise a été confiée ce jour au <b>*TRANSPORT*</b>.<br>
+                    Ils prendront contact avec vous dans les prochains jours afin de fixer un rendez-vous pour une livraison sous 7 à 10 jours ouvrés.<br>
+                    Si vous avez des informations de livraison à préciser, vous pouvez les contacter au <b>*TEL*</b>.<br><br>
+                
+                    Nous restons à votre disposition pour tous renseignements complémentaires.<br><br>
+                
+                    Vous souhaitant bonne réception.<br><br>
+                
+                    Le service Expédition<br>
+                    --- CFP ---<br>
+                    02 97 46 98 98<br>
+                    cfp@cfp56.com<br><br>
+                
+                    Rendez-vous sur notre site internet : www.cfp56.com</p>
+            </div>
+
+            <div class="mail-bl-buttons">
+                <button id="send-mail-bl" class="refresh-button">Envoyer le mail</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mail-paiement-popup" class="popup">
+        <div class="mail-paiement-popup-content">
+            <div class="commande-popup-header">
+                <h2>Envoyer mail de paiement avant fabrication</h2>
+                <span id="mail-paiement-popup-close" class="commande-popup-close">&times;</span>
+            </div>
+
+            <p id="mail-paiement-text">Envoyer le mail BL des X commandes sélectionnées ?</p>
+
+            <div class="mail-paiement-content">
+                <p id="mail-subject">CFP - Rappel de Paiement avant Fabrication de la commande *Num Commande* : *Ref*</p>
+                <p id="mail-body">Bonjour,<br><br>
+
+                    Votre commande N° <b>*NUMCOMMANDE*</b> est prévue en production dans nos ateliers le *DATEFABRICATION*.<br>
+                    Suivant les conditions de paiement définies pour celle-ci, le solde doit être versé avant sa mise en fabrication.<br><br>
+                    
+                    Merci de bien vouloir effectuer ce règlement afin de conserver la date d’expédition prévue le *DATELIVRAISON*.<br><br>
+                
+                    Vous souhaitant bonne réception.<br><br>
+                
+                    Le service Comptabilité.<br>
+                    --- CFP ---<br>
+                    02 97 46 98 98<br>
+                    cfp@cfp56.com<br><br>
+                
+                    Rendez-vous sur notre site internet : www.cfp56.com</p>
+            </div>
+
+            <div class="mail-paiement-buttons">
+                <button id="send-mail-paiement" class="refresh-button">Envoyer le mail</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mail-relance-popup" class="popup">
+        <div class="mail-relance-popup-content">
+            <div class="commande-popup-header">
+                <h2>Envoyer mail relance de paiement</h2>
+                <span id="mail-relance-popup-close" class="commande-popup-close">&times;</span>
+            </div>
+
+            <p id="mail-relance-text">Envoyer le mail BL des X commandes sélectionnées ?</p>
+
+            <div class="mail-relance-content">
+                <p id="mail-subject">CFP - Rappel de Paiement avant Fabrication de la commande *Num Commande* : *Ref*</p>
+                <p id="mail-body">Bonjour,<br><br>
+                
+                    Votre commande N° <b>*NUMCOMMANDE*</b> est en production dans nos ateliers.<br>
+                    Suivant les conditions de paiement définies pour celle-ci, le solde doit être versé avant son départ de l’usine qui est prévu le *DATELIVRAISON*.<br><br> 
+                    
+                    Merci de bien vouloir effectuer ce règlement afin de conserver la date d’expédition prévue.<br><br>
+                
+                    Vous souhaitant bonne réception.<br><br>
+                
+                    Le service Comptabilité.<br>
+                    --- CFP ---<br>
+                    02 97 46 98 98<br>
+                    cfp@cfp56.com<br><br>
+                
+                    Rendez-vous sur notre site internet : www.cfp56.com</p>
+            </div>
+
+            <div class="mail-relance-buttons">
+                <button id="send-mail-relance" class="refresh-button">Envoyer le mail</button>
+            </div>
+        </div>
+    </div>
+
+
     <script type="module" src="/script.js"></script>
     <script type="module" src="/table.js"></script>
     <script type="module" src="/popup.js"></script>
     <script type="module" src="/filters.js"></script>
+    <script type="module" src="/mail.js"></script>
 </body>
 </html>

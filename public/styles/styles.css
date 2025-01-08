@@ -17,10 +17,13 @@ body.no-scroll {
     font-size: 80px;
     font-weight: bold;
     opacity: 0;
-    transition: opacity 0.5s;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     color: white;
+}
+
+button:hover {
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* Définition de l'animation zoom durée */
@@ -193,7 +196,6 @@ button {
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    width: 20%;
 }
 
 .popup p {
@@ -245,7 +247,7 @@ button {
     align-items: center;
     z-index: 9999;
     backdrop-filter: blur(5px); /* Flou d'arrière-plan pour un effet moderne */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease-in-out; /* Transition douce pour l'effet de fondu */
     overflow: hidden; /* Empêche le défilement */
 }
 
@@ -308,10 +310,9 @@ button {
 }
 
 #leave-yes {
-    background-color: #004d99;
     color: white;
     margin-right: 10px; /* Espacement à droite entre les boutons */
-    border: 1px solid #004d99;
+    border: 1px solid #333;
 }
 
 #leave-no {

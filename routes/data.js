@@ -65,5 +65,56 @@ router.get('/semaine-en-cours', (req, res) => {
       }
     });
   });
+
+  // Route pour modifier la semaine en cours
+router.post('/modif-semaine', (req, res) => {
+
+    console.log('Requête POST reçue:', req.body);
+
+    let { utilisateur, semaine, annee } = req.body;
+  
+    // Vérifier les paramètres
+    if (!utilisateur || !semaine || !annee) {
+      res.status(400).send('Paramètres manquants');
+      return;
+    }
+  
+    // Vérifier que la semaine est un nombre
+    if (isNaN(semaine) || isNaN(annee)) {
+      res.status(400).send('La semaine et l\'année doivent être des nombres');
+      return;
+    }
+  
+    // Vérifier que la semaine est comprise entre 1 et 53
+    if (semaine < 1 || semaine > 53) {
+      res.status(400).send('La semaine doit être comprise entre 1 et 53');
+      return;
+    }
+
+    // La semaine doit avoir 2 chiffres donc il faut ajouter un 0 si nécessaire
+    semaine = semaine.toString().padStart(2, '0');
+  
+    // Vérifier que l'année est supérieure à 2000
+    if (annee < 2000) {
+      res.status(400).send('L\'année doit être supérieure à 2000');
+      return;
+    }
+  
+    // Mettre à jour la base de données
+    const sqlQuery = `
+      UPDATE cfpcallreport
+      SET typeDoc = '${semaine}', NumDoc = '${annee}'
+      WHERE Utilisateur = '${utilisateur}';
+    `;
+  
+    db.query(sqlQuery, (err, results) => {
+      if (err) {
+        console.error('Erreur de requête SQL:', err);
+        res.status(500).send('Erreur serveur');
+      } else {
+        res.send('Semaine modifiée avec succès');
+      }
+    });
+  });
   
   module.exports = router;

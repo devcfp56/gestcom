@@ -19,6 +19,120 @@ section {
     font-size: 14px;
 }
 
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#actions-livr {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+#select-all.active {
+    background-color: #e0e0e0;
+}
+
+#select-all-correze.active {
+    background-color: #e0e0e0;
+}
+
+#number-of-selected {
+    font-size: 14px;
+}
+
+#actions-prod {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.mail-bl-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 66%;
+    min-width: 33%;
+    margin: auto; /* Centrer horizontalement */
+}
+
+.mail-bl-popup-content button{
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.mail-bl-content {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+#mail-subject {
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+#mail-body {
+    margin: 0;
+}
+
+.mail-paiement-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 66%;
+    min-width: 33%;
+    margin: auto; /* Centrer horizontalement */
+}
+
+.mail-paiement-popup-content button{
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.mail-paiement-content {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.mail-relance-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 66%;
+    min-width: 33%;
+    margin: auto; /* Centrer horizontalement */
+}
+
+.mail-relance-popup-content button{
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.mail-relance-content {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
 /* Tableau des commandes */
 table {
     width: 100%;
@@ -37,8 +151,8 @@ table th.etat, td.etat {
 }
 
 table td, table th {
-    padding: 20px 20px;
-    text-align: left;
+    padding: 10px 20px;
+    text-align: center;
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
     overflow-wrap: break-word; /* Propriété recommandée */
@@ -115,9 +229,36 @@ td.commentaire, th.commentaire {
     text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
 }
 
+td.commentaire-prod, th.commentaire-prod {
+    width: 6%; /* Largeur fixe pour la colonne commentaire */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+}
+
+td.commentaire {
+    text-align: left;
+}
+
+td.commentaire-prod {
+    text-align: left;
+}
+
 /* Spécifie une largeur fixe pour la colonne "Commande" */
 td.commande, th.commande {
     width: 5%; /* Largeur fixe pour la colonne commande */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+td.etat, th.etat {
+    width: 12%; /* Largeur fixe pour la colonne etat */
+}
+
+td.commande-prod, th.commande-prod {
+    width: 4%; /* Largeur fixe pour la colonne commande */
     word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
     overflow: hidden; /* Evite que le texte déborde */
     text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
@@ -134,7 +275,32 @@ td.aravp, th.aravp {
 
 /* Spécifie une largeur fixe pour la colonne "CA" */
 td.ca, th.ca {
-    width: 5%; /* Largeur fixe pour la colonne CA */
+    width: 4%; /* Largeur fixe pour la colonne CA */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+/* Spécifie une largeur fixe pour la colonne "CA" */
+td.aravp, th.aravp {
+    width: 4%; /* Largeur fixe pour la colonne CA */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+th.ref, td.ref {
+    width: 8%; /* Largeur fixe pour la colonne ref */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
+th.ref-prod, td.ref-prod {
+    width: 4%; /* Largeur fixe pour la colonne ref */
     word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
     overflow: hidden; /* Evite que le texte déborde */
     text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
@@ -150,6 +316,14 @@ td.semliv, th.semliv {
     text-align: center;
 }
 
+td.semliv-prod, th.semliv-prod {
+    width: 3%; /* Largeur fixe pour la colonne semliv */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
 td.transp, th.transp {
     width: 6%; /* Largeur fixe pour la colonne transp */
     word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
@@ -158,8 +332,16 @@ td.transp, th.transp {
     text-align: center;
 }
 
+td.transp-prod, th.transp-prod {
+    width: 5%; /* Largeur fixe pour la colonne transp */
+    word-wrap: break-word; /* Pour que le texte s'enroule si nécessaire */
+    overflow: hidden; /* Evite que le texte déborde */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    text-align: center;
+}
+
 td.dep, th.dep {
-    width: 3%;
+    width: 2%;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -167,14 +349,22 @@ td.dep, th.dep {
 }
 
 td.details, th.details {
-    width: 8%;
+    width: 10%;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 td.client, th.client {
-    width: 10%;
+    width: 8%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+td.client-prod, th.client-prod {
+    width: 6%;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -268,17 +458,36 @@ th.semliv:hover::after {
     background-color: #388e3c; /* vert foncé */
 }
 
+/* DEV EN COURS */
+
+main #dev-en-cours {
+    display: none; /* Masqué par défaut */
+    flex-direction: column;
+    align-items: flex-start; /* Alignement des éléments à gauche */
+    gap: 5px; /* Espacement entre le h2 et le p */
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 215px); /* Ajuster la hauteur pour laisser de l'espace pour le header */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    justify-content: start; /* Centrer verticalement */
+    padding-top: 150px;
+    align-items: center; /* Centrer horizontalement */
+    z-index: 1000; /* Assurer qu'elle est au-dessus des autres éléments */
+    color: white;
+}
+
+/* FIN DEV EN COURS */
 
 /* responsive pour les écrans moyens (passer de 14px à 12px) */
-@media (max-width: 1919px) {
+@media (max-width: 1920px) {
     table th {
-        font-size: 14px;
-        padding: 15px;
+        font-size: 12px;
+        padding: 12px;
     }
 
     table td {
         font-size: 12px;
-        padding: 15px;
+        padding: 12px;
     }
 
     section {

@@ -93,6 +93,90 @@ document.querySelectorAll('#nav a').forEach(link => {
     });
 });
 
+// Ouvrir la popup modif-semaine-popup quand modif-semaine est cliqué
+document.getElementById('modif-semaine').addEventListener('click', () => {
+    document.getElementById('modif-semaine-popup').style.display = 'flex';
+
+    // modif-semaine-reset et commande-popup-close et clic en dehors de la popup pour fermer la popup
+    document.getElementById('modif-semaine-reset').addEventListener('click', () => {
+        document.getElementById('modif-semaine-popup').style.display = 'none';
+    });
+
+    document.getElementById('modif-semaine-popup-close').addEventListener('click', () => {
+        document.getElementById('modif-semaine-popup').style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target.id === 'modif-semaine-popup') {
+            document.getElementById('modif-semaine-popup').style.display = 'none';
+        }
+    });
+
+    /* Préremplir les chaps par les valeurs actuelles (recuperer alu-doc et pvc-doc qui sont les dates sous la forme "SS-AAAA") */
+    const semaineAlu = document.getElementById('alu-doc').textContent.split('-')[0];
+    const anneeAlu = document.getElementById('alu-doc').textContent.split('-')[1];
+    const semainePvc = document.getElementById('pvc-doc').textContent.split('-')[0];
+    const anneePvc = document.getElementById('pvc-doc').textContent.split('-')[1];
+
+    console.log(semaineAlu, anneeAlu, semainePvc, anneePvc);
+
+    document.getElementById('week-number-alu').value = semaineAlu;
+    document.getElementById('year-alu').value = anneeAlu;
+
+    document.getElementById('week-number-pvc').value = semainePvc;
+    document.getElementById('year-pvc').value = anneePvc;
+
+    // Si modif-semaine-button on envoie la requête data/modif-semaine avec les valeurs GESCOMALU/GESCOMPVC, la semaine et l'année
+    document.getElementById('modif-semaine-button').addEventListener('click', () => {
+        const semaineAlu = document.getElementById('week-number-alu').value;
+        const anneeAlu = document.getElementById('year-alu').value;
+        const semainePvc = document.getElementById('week-number-pvc').value;
+        const anneePvc = document.getElementById('year-pvc').value;
+        
+        // Si les semaines n'ont pas été modifiées, on ne fait rien
+        if (semaineAlu === document.getElementById('alu-doc').textContent.split('-')[0] && anneeAlu === document.getElementById('alu-doc').textContent.split('-')[1] && semainePvc === document.getElementById('pvc-doc').textContent.split('-')[0] && anneePvc === document.getElementById('pvc-doc').textContent.split('-')[1]) {
+            document.getElementById('modif-semaine-popup').style.display = 'none';
+            return;
+        }
+
+        fetch('/data/modif-semaine', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                utilisateur: 'GESCOMALU',
+                semaine: semaineAlu,
+                annee: anneeAlu
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+
+        fetch('/data/modif-semaine', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                utilisateur: 'GESCOMPVC',
+                semaine: semainePvc,
+                annee: anneePvc
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+
+        document.getElementById('modif-semaine-popup').style.display = 'none';
+
+        // Recharger la page après la modification
+        location.reload();
+    });
+});
 
 // Appel toutes les 5 minutes
 setInterval(checkIfOneHourPassed, 300000); // 5 minutes en millisecondes

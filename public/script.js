@@ -10,7 +10,7 @@ if (lastRefresh) {
 // Fonction pour mettre à jour l'heure du dernier rafraîchissement
 export function updateLastRefresh() {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+    const formattedTime = now.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
     localStorage.setItem('lastRefresh', formattedTime); // Sauvegarde dans le localStorage
     document.getElementById('last-refresh').textContent = formattedTime; // Mise à jour de l'affichage
 }
@@ -98,6 +98,29 @@ function setActiveView(viewId) {
         // Modifier la couleur de fond de #refresh-button:hover
         document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #4CAF50');
 
+        // afficher actions-livr
+        document.getElementById('actions-livr').style.display = 'flex';
+
+        // cacher actions-prod
+        document.getElementById('actions-prod').style.display = 'none';
+
+        // cacher infos-adv
+        document.getElementById('infos-adv').style.display = 'none';
+
+        // Modifier la couleur de fond de #refresh-yes
+        document.styleSheets[0].addRule('#refresh-yes', 'background-color: #4CAF50');
+
+        // Modifier la couleur de fond de #en-attente.active
+        document.styleSheets[2].addRule('#en-attente.active', 'background-color: #4CAF50');
+
+        /* DEV EN COURS */
+        // passer main #dev-en-cours à display: none; */
+        document.getElementById('dev-en-cours').style.display = 'none';
+
+        // Retablir le scroll
+        document.body.style.overflow = 'auto';
+        /* FIN DEV EN COURS */
+
     } else if (viewId === 'adv-view') {
         // Revenir à la couleur bleue (#004d99)
         document.getElementById('header').style.backgroundColor = '#004d99';
@@ -140,6 +163,29 @@ function setActiveView(viewId) {
         // Modifier la couleur de fond de #refresh-button:hover
         document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #004d99');
 
+        // cacher actions-livr
+        document.getElementById('actions-livr').style.display = 'none';
+
+        // cacher actions-prod
+        document.getElementById('actions-prod').style.display = 'none';
+
+        // afficher infos-adv
+        document.getElementById('infos-adv').style.display = 'block';
+
+        // Modifier la couleur de fond de #refresh-yes
+        document.styleSheets[0].addRule('#refresh-yes', 'background-color: #004d99');
+
+        // Modifier la couleur de fond de ##en-attente.active
+        document.styleSheets[2].addRule('#en-attente.active', 'background-color: #004d99');
+
+        /* DEV EN COURS */
+        // passer main #dev-en-cours à display: none; */
+        document.getElementById('dev-en-cours').style.display = 'none';
+
+        // Retablir le scroll
+        document.body.style.overflow = 'auto';
+        /* FIN DEV EN COURS */
+
     } else if (viewId === 'prod-view') {
         // Changer la couleur de l'en-tête en rouge (#ffa332)
         document.getElementById('header').style.backgroundColor = '#ffa332';
@@ -181,6 +227,32 @@ function setActiveView(viewId) {
 
         // Modifier la couleur de fond de #refresh-button:hover
         document.styleSheets[0].addRule('#refresh-button:hover', 'background-color: #ffa332');
+
+        // cacher actions-livr
+        document.getElementById('actions-livr').style.display = 'none';
+
+        // afficher actions-prod
+        document.getElementById('actions-prod').style.display = 'flex';
+
+        // cacher infos-adv
+        document.getElementById('infos-adv').style.display = 'none';
+
+        // Modifier la couleur de fond de #refresh-yes
+        document.styleSheets[0].addRule('#refresh-yes', 'background-color: #ffa332');
+
+        // Modifier la couleur de fond de ##en-attente.active
+        document.styleSheets[2].addRule('#en-attente.active', 'background-color: #ffa332');
+
+        /* DEV EN COURS */
+        // passer main #dev-en-cours à display: flex; */
+        document.getElementById('dev-en-cours').style.display = 'flex';
+
+        // Emecher le scroll sur le body pour éviter de scroller la page pendant le défilement des éléments
+        document.body.style.overflow = 'hidden';
+
+        /* FIN DEV EN COURS */
+
+
     }
 }
 
@@ -318,7 +390,6 @@ document.getElementById("toggle-filter-repres").addEventListener("click", functi
         icon.classList.add("fa-chevron-up");
     }
 });
-
 
 /* EASTEREGG PLM
 

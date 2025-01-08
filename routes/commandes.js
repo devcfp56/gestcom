@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
               ROUND(SUM(CASE WHEN d.systeme IN ('ALU PORTAIL', 'ALU CLOTURE', 'PVC PORTAIL', 'PVC CLOTURE') 
                   THEN d.pvconf + d.pvconfacc ELSE 0 END), 2) AS PrixFabriquer,
               z.descriptio, p.soudure, p.gainage, p.debit, p.usinage, p.montage, p.cloture, p.embalage, 
-              c.fraisport, c.supplfft, c.supplpc
+              c.fraisport, c.supplfft, c.supplpc, cl.email
             FROM commande c
             LEFT JOIN client cl ON cl.code = c.client
             LEFT JOIN detail d ON d.commande = c.numero

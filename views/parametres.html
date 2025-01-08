@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup avec Mouvement et Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(45deg, #ff6ec7, #ff9a8b);
+            background-size: 400% 400%;
+            animation: gradientMove 5s ease infinite;
+            font-family: Montserrat, sans-serif;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .popup {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transition: transform 0.3s ease;
+        }
+
+        .popup:hover {
+            transform: scale(1.05);
+        }
+
+        .popup button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6347;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #ff4500;
+        }
+
+        .counter {
+            font-size: 2rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+        }
+
+        .timer {
+            font-size: 2rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+        }
+
+        .big-points {
+            font-size: 5rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            margin-top: 50px;
+        }
+
+        .replay-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .replay-button:hover {
+            background-color: #ff4500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="popup" id="popup">
+        <p>Rien ici, voulez-vous quitter ?</p>
+        <button onclick="window.close()">Oui</button>
+        <button onclick="closePopup()">Non</button>
+    </div>
+
+    <div id="bigPoints" class="big-points"></div>
+    <div id="timer" class="timer">Temps restant : 30</div>
+    <div class="counter" id="counter">Points : 0</div>
+
+    <button id="replayButton" class="replay-button" style="display:none;" onclick="replayGame()">Recommencer</button>
+
+    <script>
+        var points = 0;
+        var timer;
+        var countdown;
+
+        // Fonction pour déplacer la popup quand la souris s'approche
+        document.querySelector('#popup').addEventListener('mouseenter', function() {
+            movePopup();
+            increasePoints();
+        });
+
+        // Fonction pour déplacer la popup à une nouvelle position aléatoire
+        function movePopup() {
+            var popup = document.getElementById('popup');
+            var maxX = window.innerWidth - popup.offsetWidth;
+            var maxY = window.innerHeight - popup.offsetHeight;
+
+            var randomX = Math.floor(Math.random() * maxX);
+            var randomY = Math.floor(Math.random() * maxY);
+
+            popup.style.left = randomX + 'px';
+            popup.style.top = randomY + 'px';
+        }
+
+        // Fonction pour augmenter les points
+        function increasePoints() {
+            points++;
+            document.getElementById('counter').textContent = "Points : " + points;
+        }
+
+        // Fonction pour fermer la popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Timer de 30 secondes
+        function startTimer() {
+            var timeLeft = 30;
+            document.getElementById('timer').textContent = "Temps restant : " + timeLeft;
+
+            countdown = setInterval(function() {
+                timeLeft--;
+                document.getElementById('timer').textContent = "Temps restant : " + timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    showBigPoints();
+                }
+            }, 1000);
+        }
+
+        // Fonction pour afficher les points en gros avec animation
+        function showBigPoints() {
+            var bigPointsDiv = document.getElementById('bigPoints');
+            bigPointsDiv.textContent = "Points : " + points;
+            bigPointsDiv.style.opacity = 1;  // Rendre les points visibles avec animation
+            document.getElementById('popup').style.display = 'none';  // Cacher la popup
+            document.getElementById('replayButton').style.display = 'inline-block';  // Afficher le bouton recommencer
+        }
+
+        // Fonction pour recommencer la partie
+        function replayGame() {
+            points = 0;
+            document.getElementById('counter').textContent = "Points : 0";
+            document.getElementById('bigPoints').style.opacity = 0;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('replayButton').style.display = 'none';
+            startTimer();  // Redémarrer le timer
+        }
+
+        // Démarre le timer dès l'ouverture de la page
+        startTimer();
+    </script>
+</body>
+</html>

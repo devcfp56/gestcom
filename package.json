@@ -2,6 +2,7 @@
   "name": "gestcom",
   "version": "1.0.0",
   "main": "index.js",
+  "bin": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
@@ -12,9 +13,15 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "mysql2": "^3.11.4"
+    "mysql2": "^3.11.4",
+    "nodemailer": "^6.9.16"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
+  },
+  "pkg": {
+    "scripts": "server.js",
+    "targets": ["node16-win-x64"],
+    "outputPath": "build"
   }
 }

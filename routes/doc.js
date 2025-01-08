@@ -1,16 +1,14 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const router = express.Router();
 
-router.get('/files/:orderNumber', (req, res) => {
+router.get('/files/:orderNumber', async (req, res) => {
     const orderNumber = req.params.orderNumber;
-    const directoryPath = 'W:/pdf';
+    const directoryPath = '\\\\srv-applis19\\winpro\\pdf';
 
-    fs.readdir(directoryPath, (err, files) => {
-        if (err) {
-            return res.status(500).send('Unable to scan directory: ' + err);
-        }
+    try {
+        const files = await fs.readdir(directoryPath);
 
         const matchingFiles = files.filter(file => file.includes(orderNumber));
 
@@ -24,27 +22,30 @@ router.get('/files/:orderNumber', (req, res) => {
 
         let mostRecentFile = null;
 
-        // Trouver le fichier le plus récent parmi ceux qui commencent par "ARC2" ou "Cde"
         if (arc2OrCdeFiles.length > 0) {
-            const filesWithStats = arc2OrCdeFiles.map(file => {
-                const fullPath = path.join(directoryPath, file);
-                const stats = fs.statSync(fullPath);
-                return { file, mtime: stats.mtime };
-            });
+            // Collecter les stats de manière asynchrone
+            const filesWithStats = await Promise.all(
+                arc2OrCdeFiles.map(async file => {
+                    const fullPath = path.join(directoryPath, file);
+                    const stats = await fs.stat(fullPath);
+                    return { file, mtime: stats.mtime };
+                })
+            );
 
             mostRecentFile = filesWithStats.reduce((latest, current) =>
                 current.mtime > latest.mtime ? current : latest
             ).file;
         }
 
-        // Construire la réponse
         const responseFiles = mostRecentFile ? [mostRecentFile, ...otherFiles] : otherFiles;
 
         res.json(responseFiles);
 
-        // Afficher les fichiers trouvés
         console.log('Fichiers trouvés:', responseFiles);
-    });
+    } catch (err) {
+        console.error('Erreur lors de l’accès au répertoire :', err);
+        res.status(500).send('Erreur serveur');
+    }
 });
 
 module.exports = router;

@@ -71,6 +71,11 @@ aside ul li input {
     transition: color 0.2s ease; /* Transition de couleur au survol */
 }
 
+/* Changement de couleur au survol */
+.filters-header i#clear-all:hover {
+    color: #e74c3c;
+}
+
 /* Étendre le séparateur sur toute la largeur */
 .separator::before {
     content: '';
@@ -148,7 +153,6 @@ label {
     gap: 10px; /* Espace entre les éléments */
     flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
     margin: 20px;
-    width: 100%;
 }
 
 #produits-alu, #produits-pvc, #produits-tous, #retards, #groupage-ports, #attente-paiement {
@@ -317,7 +321,6 @@ label {
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
     padding: 10px;
     text-align: center;
 }
@@ -325,12 +328,6 @@ label {
 #en-attente.active {
     background-color: #004d99;
     color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 10px;
-    text-align: center;
 }
 
 /* Par défaut, le filtre est caché */
@@ -338,6 +335,10 @@ label {
     display: none;
     transition: max-height 0.3s ease-out;
     border-bottom: 1px solid #333;
+}
+
+.filters-date-container label {
+    margin-top: 0px;
 }
 
 .filter-container span {
@@ -478,13 +479,13 @@ label {
 }
 
 
-@media (max-width: 1919px) {
+@media (max-width: 1920px) {
     button, input[type="text"], input[type="checkbox"] {
         font-size: 12px;
     }
 
     #filters-panel h2 {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .filters label {
@@ -516,10 +517,18 @@ label {
     }
 
     .filter-container span {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     #filter-date-options {
+        font-size: 12px;
+    }
+
+    .etat-button {
+        font-size: 12px;
+    }
+
+    #transporteurs, #representants {
         font-size: 12px;
     }
 
